@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import Componentes.Mina;
+import Componentes.Armeria;
+import Componentes.ThreadMina;
+import Componentes.TemploBruja;
 /**
  *
  * @author jecheverria
@@ -25,11 +28,22 @@ public class Cliente {
     private DataOutputStream salidaDatos;
     Pantalla pantalla;
     String nombre ;
-     
+    
+    /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
+    public int acero;
+    public int dinero;
+    public boolean puede_usar_comodin;
+    //public Mina mina;
+    //public TemploBruja templo_bruja;
+    
+    
+    /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
     ThreadCliente threadCliente;
 
     public Cliente(Pantalla pantalla) {
-    
+        acero = 0;
+        dinero = 0;
+        puede_usar_comodin = false;
         this.pantalla = pantalla;
         conectar();
     }
@@ -43,9 +57,7 @@ public class Cliente {
             salidaDatos = new DataOutputStream(socket.getOutputStream());
             threadCliente = new ThreadCliente(socket, this);
             threadCliente.start();
-            // al conectarse, envía el nombre
             this.nombre = JOptionPane.showInputDialog("Nombre: ");
-            //new CrearPersonaje().setVisible(true);
             
             salidaDatos.writeUTF(nombre);
         } catch (IOException ex) {
