@@ -16,6 +16,7 @@ import Componentes.Mina;
 import Componentes.Armeria;
 import Componentes.ThreadMina;
 import Componentes.TemploBruja;
+import GUI.Play;
 /**
  *
  * @author jecheverria
@@ -24,10 +25,11 @@ public class Cliente {
     private final String IP = "localhost";
     private final int PORT = 8084;
     private Socket socket;
-    ObjectOutputStream salida;
+    public ObjectOutputStream salida;
     private DataOutputStream salidaDatos;
-    Pantalla pantalla;
-    String nombre ;
+  //  Pantalla pantalla;
+    Play pantalla;
+    public String nombre ;
     
     /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
     public int acero;
@@ -40,11 +42,11 @@ public class Cliente {
     /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
     ThreadCliente threadCliente;
 
-    public Cliente(Pantalla pantalla) {
+    public Cliente(Play matriz) {
         acero = 0;
         dinero = 0;
         puede_usar_comodin = false;
-        this.pantalla = pantalla;
+        this.pantalla = matriz;
         conectar();
     }
 

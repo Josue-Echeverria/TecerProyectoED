@@ -20,7 +20,6 @@ public class Pantalla extends javax.swing.JFrame {
     /** Creates new form Pantalla */
     public Pantalla() {
         initComponents();
-        cliente = new Cliente(this);
     }
 
     /** This method is called from within the constructor to

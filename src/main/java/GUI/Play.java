@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import Cliente.Cliente;
+import Cliente.Pantalla;
+import Modelos.Mensaje;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -16,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
+import java.io.IOException;
 
 /**
  *
@@ -23,6 +27,7 @@ import javax.swing.JOptionPane;
  */
 public class Play extends javax.swing.JFrame {
     private ArrayList<JLabel> labels;
+    Cliente cliente;
 
     /**
      * Creates new form Play
@@ -32,8 +37,12 @@ public class Play extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         generarLabels();
         generarLabelsPlayer();
+        cliente = new Cliente(this);
     }
-
+    public void write(String text){
+        
+        this.jTextArea1.append(text + "\n");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +68,8 @@ public class Play extends javax.swing.JFrame {
         comandoInput = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         historialPanel = new javax.swing.JPanel();
-        historialLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,11 +84,11 @@ public class Play extends javax.swing.JFrame {
         panelCuadricula.setLayout(panelCuadriculaLayout);
         panelCuadriculaLayout.setHorizontalGroup(
             panelCuadriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelCuadriculaLayout.setVerticalGroup(
             panelCuadriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(panelCuadricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 61, -1, -1));
@@ -90,11 +100,11 @@ public class Play extends javax.swing.JFrame {
         panelCuadriculaPlayer.setLayout(panelCuadriculaPlayerLayout);
         panelCuadriculaPlayerLayout.setHorizontalGroup(
             panelCuadriculaPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelCuadriculaPlayerLayout.setVerticalGroup(
             panelCuadriculaPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(panelCuadriculaPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, -1, -1));
@@ -134,7 +144,7 @@ public class Play extends javax.swing.JFrame {
             .addGroup(tituloPanel2Layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(tituloLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tituloPanel2Layout.setVerticalGroup(
             tituloPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +157,11 @@ public class Play extends javax.swing.JFrame {
         player2Panel.setLayout(player2PanelLayout);
         player2PanelLayout.setHorizontalGroup(
             player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         player2PanelLayout.setVerticalGroup(
             player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(player2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 80, -1, 70));
@@ -160,11 +170,11 @@ public class Play extends javax.swing.JFrame {
         player3Panel.setLayout(player3PanelLayout);
         player3PanelLayout.setHorizontalGroup(
             player3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         player3PanelLayout.setVerticalGroup(
             player3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(player3Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 190, -1, -1));
@@ -173,11 +183,11 @@ public class Play extends javax.swing.JFrame {
         player4Panel.setLayout(player4PanelLayout);
         player4PanelLayout.setHorizontalGroup(
             player4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         player4PanelLayout.setVerticalGroup(
             player4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(player4Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 300, -1, -1));
@@ -186,11 +196,11 @@ public class Play extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 410, -1, -1));
@@ -203,7 +213,7 @@ public class Play extends javax.swing.JFrame {
         textoPanel.setLayout(textoPanelLayout);
         textoPanelLayout.setHorizontalGroup(
             textoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+            .addComponent(textoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         textoPanelLayout.setVerticalGroup(
             textoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,17 +230,33 @@ public class Play extends javax.swing.JFrame {
         bg.add(comandoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, 340, 30));
 
         jButton1.setText("Enviar");
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 710, 120, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 30));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout historialPanelLayout = new javax.swing.GroupLayout(historialPanel);
         historialPanel.setLayout(historialPanelLayout);
         historialPanelLayout.setHorizontalGroup(
             historialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(historialLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addGroup(historialPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addContainerGap())
         );
         historialPanelLayout.setVerticalGroup(
             historialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(historialLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addGroup(historialPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         bg.add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 480, 110));
@@ -252,6 +278,15 @@ public class Play extends javax.swing.JFrame {
     private void comandoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comandoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comandoInputActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
+        } catch (IOException ex) {
+            //Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,10 +376,11 @@ public class Play extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JTextField comandoInput;
-    private javax.swing.JLabel historialLabel;
     private javax.swing.JPanel historialPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel panelCuadricula;
     private javax.swing.JPanel panelCuadriculaPlayer;
     private javax.swing.JPanel player2Panel;
