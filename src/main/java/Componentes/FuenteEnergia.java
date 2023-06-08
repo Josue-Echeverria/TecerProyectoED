@@ -13,6 +13,8 @@ public class FuenteEnergia {
     private boolean destruido;  // Indica si les destruyeron la fuente
     private int posicionX;  // Ubicación en el mar X
     private int posicionY;  // Ubicación en el mar Y
+    private boolean visiblePropio;
+    private boolean visibleEnemigo;
     
     // Métodos
 

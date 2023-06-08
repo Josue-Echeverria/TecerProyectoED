@@ -10,51 +10,49 @@ package Mar;
  * @author lmaag
  */
 public class Isla {
-    private boolean FuenteEnergia;
-    private boolean Fabrica;
-    private boolean Templo;
-    private boolean Mercado;
-    private int cantidadBarcosGuerra;
+    int id;
+    String tipoIsla;
+    int x;
+    int y;
 
-    public boolean isFuenteEnergia() {
-        return FuenteEnergia;
+    public int getX() {
+        return x;
     }
 
-    public void setFuenteEnergia(boolean FuenteEnergia) {
-        this.FuenteEnergia = FuenteEnergia;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public boolean isFabrica() {
-        return Fabrica;
+    public int getY() {
+        return y;
     }
 
-    public void setFabrica(boolean Fabrica) {
-        this.Fabrica = Fabrica;
-    }
-
-    public boolean isTemplo() {
-        return Templo;
-    }
-
-    public void setTemplo(boolean Templo) {
-        this.Templo = Templo;
-    }
-
-    public boolean isMercado() {
-        return Mercado;
-    }
-
-    public void setMercado(boolean Mercado) {
-        this.Mercado = Mercado;
-    }
-
-    public int getCantidadBarcosGuerra() {
-        return cantidadBarcosGuerra;
-    }
-
-    public void setCantidadBarcosGuerra(int cantidadBarcosGuerra) {
-        this.cantidadBarcosGuerra = cantidadBarcosGuerra;
+    public void setY(int y) {
+        this.y = y;
     }
     
-    
+    public Isla(int id, String tipoIsla) {
+        this.id = id;
+        this.tipoIsla = tipoIsla;
+    }
+
+    public Isla(String tipoIsla) {
+        this.tipoIsla = tipoIsla;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTipoIsla() {
+        return tipoIsla;
+    }
+
+    public void setTipoIsla(String tipoIsla) {
+        this.tipoIsla = tipoIsla;
+    }
 }

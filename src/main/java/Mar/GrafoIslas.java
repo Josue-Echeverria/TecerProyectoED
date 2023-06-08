@@ -12,6 +12,7 @@ package Mar;
 import java.util.ArrayList;
 import java.util.List;
 import Componentes.Conector;
+import Mar.Isla;
 public class GrafoIslas {
     private List<Isla> islas;
     private List<List<Conector>> conexiones;
@@ -44,22 +45,29 @@ public class GrafoIslas {
         return conexiones.get(isla);
     }
     
-    public GrafoIslas[][] obtenerMatrizAdyacencia() {
+    public Isla[][] generarMatrizAdyacencia() {
         int numIslas = islas.size();
-        GrafoIslas[][] matriz = new GrafoIslas[numIslas][numIslas];
+        Isla[][] matrizAdyacencia = new Isla[numIslas][numIslas];
 
+        // Inicializar la matriz de adyacencia con ceros
         for (int i = 0; i < numIslas; i++) {
             for (int j = 0; j < numIslas; j++) {
-                if (i == j) {
-                    matriz[i][j] = null; // No hay conexión entre una isla y ella misma
-                } else if (conexiones.get(i).contains(j)) {
-                    matriz[i][j] = this; // El grafo de islas está conectado a la isla i
-                } else {
-                    matriz[i][j] = null; // No hay conexión entre las islas i y j
-                }
+                matrizAdyacencia[i][j] = new Isla("Null");
             }
         }
 
-        return matriz;
+        // Llenar la matriz de adyacencia con las conexiones existentes
+        for (int i = 0; i < numIslas; i++) {
+            List<Conector> adyacentes = conexiones.get(i);
+            for (Conector conector : adyacentes) {
+                Isla isla1 = conector.getIsla1();
+                Isla isla2 = conector.getIsla2();
+                int indice1 = islas.indexOf(isla1);
+                int indice2 = islas.indexOf(isla2);
+                matrizAdyacencia[indice1][indice2] = matrizAdyacencia[indice2][indice1] = isla1;
+            }
+        }
+
+        return matrizAdyacencia;
     }
 }

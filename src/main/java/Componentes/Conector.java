@@ -26,4 +26,14 @@ public class Conector {
     public Isla getIsla2() {
         return isla2;
     }
+
+    public void setIsla1(Isla isla1) {
+        this.isla1 = isla1;
+    }
+
+    public void setIsla2(Isla isla2) {
+        this.isla2 = isla2;
+    }
+    
+    
 }
