@@ -18,10 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import java.io.IOException;
+import GUI.Matriz;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +35,7 @@ import javax.swing.JFrame;
  * @author hdani
  */
 public class Play extends javax.swing.JFrame {
-    private ArrayList<JLabel> labels;
+    private Matriz[][] labels;
     Cliente cliente;
     TiendaComponentes tienda;
 
@@ -42,6 +45,7 @@ public class Play extends javax.swing.JFrame {
     public Play() {
         initComponents();
         this.setLocationRelativeTo(null);
+        labels = new Matriz [20][20];
         generarLabels();
         generarLabelsPlayer();
         cliente = new Cliente(this);
@@ -77,6 +81,20 @@ public class Play extends javax.swing.JFrame {
         historialPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        colorFuentePanel = new javax.swing.JPanel();
+        colorMercadoPanel = new javax.swing.JPanel();
+        colorConectorPanel = new javax.swing.JPanel();
+        colorMinaPanel = new javax.swing.JPanel();
+        colorTemploPanel = new javax.swing.JPanel();
+        colorArmeriaPanel = new javax.swing.JPanel();
+        armeriaLabel = new javax.swing.JLabel();
+        fuenteLabel = new javax.swing.JLabel();
+        mercadoLabel = new javax.swing.JLabel();
+        conectorLabel = new javax.swing.JLabel();
+        minaLabel = new javax.swing.JLabel();
+        temploLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        islaCombo = new javax.swing.JComboBox<>();
         label_acero = new javax.swing.JLabel();
         label_dinero = new javax.swing.JLabel();
         button_comprar_componentes = new javax.swing.JButton();
@@ -247,7 +265,7 @@ public class Play extends javax.swing.JFrame {
                 comandoInputActionPerformed(evt);
             }
         });
-        bg.add(comandoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, 340, 30));
+        bg.add(comandoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, 380, 30));
 
         jButton1.setText("Enviar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +273,7 @@ public class Play extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 30));
+        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 710, 120, 30));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -268,7 +286,7 @@ public class Play extends javax.swing.JFrame {
             historialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(historialPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
         );
         historialPanelLayout.setVerticalGroup(
@@ -279,7 +297,153 @@ public class Play extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bg.add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 480, 110));
+        bg.add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 500, 110));
+
+        colorFuentePanel.setBackground(new java.awt.Color(204, 0, 51));
+        colorFuentePanel.setToolTipText("");
+
+        javax.swing.GroupLayout colorFuentePanelLayout = new javax.swing.GroupLayout(colorFuentePanel);
+        colorFuentePanel.setLayout(colorFuentePanelLayout);
+        colorFuentePanelLayout.setHorizontalGroup(
+            colorFuentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorFuentePanelLayout.setVerticalGroup(
+            colorFuentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorFuentePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 30, 30));
+
+        colorMercadoPanel.setBackground(new java.awt.Color(0, 204, 0));
+
+        javax.swing.GroupLayout colorMercadoPanelLayout = new javax.swing.GroupLayout(colorMercadoPanel);
+        colorMercadoPanel.setLayout(colorMercadoPanelLayout);
+        colorMercadoPanelLayout.setHorizontalGroup(
+            colorMercadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorMercadoPanelLayout.setVerticalGroup(
+            colorMercadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorMercadoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 610, -1, -1));
+
+        javax.swing.GroupLayout colorConectorPanelLayout = new javax.swing.GroupLayout(colorConectorPanel);
+        colorConectorPanel.setLayout(colorConectorPanelLayout);
+        colorConectorPanelLayout.setHorizontalGroup(
+            colorConectorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorConectorPanelLayout.setVerticalGroup(
+            colorConectorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorConectorPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 640, -1, -1));
+
+        colorMinaPanel.setBackground(new java.awt.Color(204, 204, 0));
+
+        javax.swing.GroupLayout colorMinaPanelLayout = new javax.swing.GroupLayout(colorMinaPanel);
+        colorMinaPanel.setLayout(colorMinaPanelLayout);
+        colorMinaPanelLayout.setHorizontalGroup(
+            colorMinaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorMinaPanelLayout.setVerticalGroup(
+            colorMinaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorMinaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 670, -1, -1));
+
+        colorTemploPanel.setBackground(new java.awt.Color(255, 204, 204));
+
+        javax.swing.GroupLayout colorTemploPanelLayout = new javax.swing.GroupLayout(colorTemploPanel);
+        colorTemploPanel.setLayout(colorTemploPanelLayout);
+        colorTemploPanelLayout.setHorizontalGroup(
+            colorTemploPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorTemploPanelLayout.setVerticalGroup(
+            colorTemploPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorTemploPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 700, -1, -1));
+
+        colorArmeriaPanel.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout colorArmeriaPanelLayout = new javax.swing.GroupLayout(colorArmeriaPanel);
+        colorArmeriaPanel.setLayout(colorArmeriaPanelLayout);
+        colorArmeriaPanelLayout.setHorizontalGroup(
+            colorArmeriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        colorArmeriaPanelLayout.setVerticalGroup(
+            colorArmeriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(colorArmeriaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 730, -1, -1));
+
+        armeriaLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        armeriaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        armeriaLabel.setText("<= Armeria");
+        bg.add(armeriaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 730, 100, 30));
+
+        fuenteLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        fuenteLabel.setForeground(new java.awt.Color(255, 255, 255));
+        fuenteLabel.setText("<= Fuente");
+        bg.add(fuenteLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 580, 100, 30));
+
+        mercadoLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        mercadoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        mercadoLabel.setText("<= Mercado");
+        bg.add(mercadoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 610, 110, 30));
+
+        conectorLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        conectorLabel.setForeground(new java.awt.Color(255, 255, 255));
+        conectorLabel.setText("<= Conector");
+        bg.add(conectorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 640, 110, 30));
+
+        minaLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        minaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        minaLabel.setText("<= Mina");
+        bg.add(minaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 670, 100, 30));
+
+        temploLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
+        temploLabel.setForeground(new java.awt.Color(255, 255, 255));
+        temploLabel.setText("<=Templo");
+        bg.add(temploLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 700, 100, 30));
+
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 500, 60, 40));
+
+        islaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente", "Mercado", "Conector" }));
+        islaCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                islaComboActionPerformed(evt);
+            }
+        });
+        bg.add(islaCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 420, -1, -1));
 
         label_acero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
         label_acero.setForeground(new java.awt.Color(255, 255, 255));
@@ -465,6 +629,15 @@ public class Play extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        Graphics g = panelCuadricula.getGraphics();
+        g.drawLine(25,25,250,250);
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void islaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_islaComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_islaComboActionPerformed
+
     private void button_comprar_componentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_comprar_componentesActionPerformed
         tienda = new TiendaComponentes();
         tienda.setVisible(true);
@@ -557,7 +730,7 @@ public class Play extends javax.swing.JFrame {
         int x = 0;
         int y = 0;
         for (int i = 0; i < 20; i++){
-            x = 0;
+            y = 0;
             for(int j = 0; j < 20; j++){
                 // Label de dígitos
                 JLabel label = new JLabel("", SwingConstants.CENTER);     
@@ -568,10 +741,18 @@ public class Play extends javax.swing.JFrame {
                 label.setBorder(blackline);
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 panelCuadricula.add(label);
-                //labels.add(label);
-                x += 25;
+                labels[i][j] = new Matriz(label);
+                label.addMouseListener(new MouseAdapter(){  
+                    public void mouseClicked(MouseEvent e){
+                        String selecteditem = islaCombo.getSelectedItem().toString();
+                        int sisX = label.getLocation().x;
+                        int sisY = label.getLocation().y;
+                        labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                    }
+                });
+                y += 25;
             }
-            y += 25;
+            x += 25;
         }    
     }
 
@@ -614,11 +795,22 @@ public class Play extends javax.swing.JFrame {
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel armeriaLabel;
     private javax.swing.JPanel bg;
+    private javax.swing.JPanel colorArmeriaPanel;
+    private javax.swing.JPanel colorConectorPanel;
+    private javax.swing.JPanel colorFuentePanel;
+    private javax.swing.JPanel colorMercadoPanel;
+    private javax.swing.JPanel colorMinaPanel;
+    private javax.swing.JPanel colorTemploPanel;
     private javax.swing.JButton button_comprar_componentes;
     private javax.swing.JTextField comandoInput;
+    private javax.swing.JLabel conectorLabel;
+    private javax.swing.JLabel fuenteLabel;
     private javax.swing.JPanel historialPanel;
+    private javax.swing.JComboBox<String> islaCombo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -632,13 +824,14 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel label_acero;
-    private javax.swing.JLabel label_dinero;
+    private javax.swing.JLabel mercadoLabel;
+    private javax.swing.JLabel minaLabel;
     private javax.swing.JPanel panelCuadricula;
     private javax.swing.JPanel panelCuadriculaPlayer;
     private javax.swing.JPanel player2Panel;
     private javax.swing.JPanel player3Panel;
     private javax.swing.JPanel player4Panel;
+    private javax.swing.JLabel temploLabel;
     private javax.swing.JLabel textoLabel;
     private javax.swing.JPanel textoPanel;
     private javax.swing.JLabel tituloLabel;

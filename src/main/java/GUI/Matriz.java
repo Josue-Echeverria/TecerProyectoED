@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
@@ -12,16 +13,31 @@ import javax.swing.JLabel;
  * @author hdani
  */
 public class Matriz {
-    private javax.swing.JPanel label;
-    private boolean isla;
-    private int tipoIsla;
-    private boolean barco;
-    private boolean fuente;
-    private boolean conector;
-    public Matriz(boolean isla, int tipoIsla, boolean barco, boolean fuente, boolean conector) {
-        this.isla = isla;
-        this.tipoIsla = tipoIsla;
-        this.barco = barco;
-        this.fuente = fuente;
-    }   
+    private JLabel label;
+    private int tipo; //   0 = vacio, 1 = fuente, 2 = mercado, 3 = conector, 4 = mina, 5 = templo, 6 = armeria.
+    public Matriz(JLabel label) {
+        this.label = label;
+        this.tipo = 0;
+    }  
+    
+    public void cambieColor(String tipo){
+        Color custom;
+        switch (tipo){
+            case "Fuente":
+                custom = new Color(204, 0, 51);
+                label.setBackground(custom);
+                this.tipo = 1;
+                break;
+            case "Conector":     
+                custom = new Color(242, 242, 242);
+                label.setBackground(custom);
+                this.tipo = 3;
+                break;
+            case "Mercado":
+                custom = new Color(0, 204, 0);
+                label.setBackground(custom);
+                this.tipo = 2;
+                break;
+        }
+    }
 }
