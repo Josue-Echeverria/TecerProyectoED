@@ -4,6 +4,8 @@
  */
 package Servidor;
 
+import Cliente.Jugador;
+import Modelos.Mensaje;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -27,8 +29,7 @@ public class ServerConnectionsThread extends Thread{
                 Socket socket = server.server.accept();
                 ThreadServidor ts = new ThreadServidor(socket, server);
                 ts.start();
-                server.clientesAceptados.add(ts);
-                
+                server.threadsClientesAceptados.add(ts);
                 server.pantalla.write("Cliente conectado");
                 
             } catch (IOException ex) {

@@ -29,23 +29,13 @@ public class Cliente {
     private DataOutputStream salidaDatos;
   //  Pantalla pantalla;
     Play pantalla;
+    public Jugador jugador;
     public String nombre ;
     
-    /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
-    public int acero;
-    public int dinero;
-    public boolean puede_usar_comodin;
-    //public Mina mina;
-    //public TemploBruja templo_bruja;
-    
-    
-    /*******PASAR ESTAS VARIABLES A CLASE JUGADOR********/
+
     ThreadCliente threadCliente;
 
     public Cliente(Play matriz) {
-        acero = 0;
-        dinero = 0;
-        puede_usar_comodin = false;
         this.pantalla = matriz;
         conectar();
     }

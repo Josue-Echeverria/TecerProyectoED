@@ -4,7 +4,9 @@
  */
 package Servidor;
 
+import Cliente.Jugador;
 import Modelos.Mensaje;
+import Modelos.TipoMensaje;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,17 +18,19 @@ public class Servidor {
     private final int PORT = 8084;
     ServerSocket server;
     public PantallaServidor pantalla;
-    
-     ArrayList<ThreadServidor> clientesAceptados;
+     ArrayList<ThreadServidor> threadsClientesAceptados;
+    ArrayList<Jugador> jugadores;
     ServerConnectionsThread conexionsThread;
-    
+    public ProcesadorMensaje lector;
+
     public Servidor(PantallaServidor pantalla){
         this.pantalla = pantalla;
         connect();
-        clientesAceptados = new ArrayList<ThreadServidor>();
+        threadsClientesAceptados = new ArrayList<ThreadServidor>();
         conexionsThread = new ServerConnectionsThread(this);
         conexionsThread.start();
-        
+        jugadores = new ArrayList<Jugador>();
+        lector = new ProcesadorMensaje(this);        
     }
     
     public void connect(){
@@ -37,23 +41,35 @@ public class Servidor {
         }
     }
     
-    public void broadcoast(Mensaje mensaje){
-        
-        for (ThreadServidor cliente : clientesAceptados) {
+    public void broadcoast(Mensaje mensaje) {
+        String[] arregloMensaje = mensaje.getMensaje().split("-");
+        if("CHAT".equals(arregloMensaje[0].toUpperCase())){
+            mensaje.setMensaje(arregloMensaje[1]);
+            mensaje.setTipo(TipoMensaje.PUBLICO);
+            this.pantalla.write("Recibido: " + mensaje.toString());
+            mensajeTodos(mensaje);
+        } else if ("PRIVADO".equals(arregloMensaje[0].toUpperCase())){
+            mensaje.setReceptor(arregloMensaje[1]);
+            mensaje.setMensaje(arregloMensaje[2]);
+            mensaje.setTipo(TipoMensaje.PRIVADO);
+            this.pantalla.write("Recibido: " + mensaje.toString());
+            privateMessage(mensaje);
+        }else{
+            String mensaje_procesado;
             try {
-                cliente.salida.writeObject(mensaje);
+                mensaje_procesado = lector.leeMensaje(mensaje);
+                mensaje.setMensaje(mensaje_procesado);
             } catch (IOException ex) {
-            
+                Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.pantalla.write(mensaje.getMensaje());
         }
-        this.pantalla.write("Enviado " + clientesAceptados.size() +" veces: " + mensaje);
-        
     }
     
     
     public void privateMessage(Mensaje mensaje){
         
-        for (ThreadServidor cliente : clientesAceptados) {
+        for (ThreadServidor cliente : threadsClientesAceptados) {
             try {
                 if(mensaje.getReceptor().equals(cliente.nombre)){
                     cliente.salida.writeObject(mensaje);
@@ -63,9 +79,35 @@ public class Servidor {
             
             }
         }
-        this.pantalla.write("Enviado " + clientesAceptados.size() +" veces: " + mensaje);
+        this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
         
     }
+    public void mensajeTodos(Mensaje mensaje){
+        for (ThreadServidor cliente : threadsClientesAceptados) {
+            try {
+                cliente.salida.writeObject(mensaje);
+                //cliente.salida.
+            } catch (IOException ex) {
+       
+            }
+        }
+        this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
+    }
     
+    Jugador buscarJugador(String nombre){
+        for (Jugador jugador  : jugadores) {   
+            if(nombre.toUpperCase().equals(jugador.nombre.toUpperCase()))
+                return jugador;  
+        }
+        return null;
+    }
+    
+    ThreadServidor bucarCliente(String nombre){
+        for (ThreadServidor cliente  : threadsClientesAceptados) {
+            if(nombre.toUpperCase().equals(cliente.nombre.toUpperCase()))
+                return cliente;  
+        }
+        return null;
+    }
     
 }

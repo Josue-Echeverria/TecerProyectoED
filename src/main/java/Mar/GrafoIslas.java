@@ -8,12 +8,13 @@ package Mar;
  *
  * @author lmaag
  */
-
+import Mar.Isla;
 import java.util.ArrayList;
 import java.util.List;
 import Componentes.Conector;
-import Mar.Isla;
-public class GrafoIslas {
+import java.io.Serializable;
+public class GrafoIslas implements Serializable {
+
     private List<Isla> islas;
     private List<List<Conector>> conexiones;
 
@@ -45,6 +46,7 @@ public class GrafoIslas {
         return conexiones.get(isla);
     }
     
+    
     public Isla[][] generarMatrizAdyacencia() {
         int numIslas = islas.size();
         Isla[][] matrizAdyacencia = new Isla[numIslas][numIslas];
@@ -52,7 +54,7 @@ public class GrafoIslas {
         // Inicializar la matriz de adyacencia con ceros
         for (int i = 0; i < numIslas; i++) {
             for (int j = 0; j < numIslas; j++) {
-                matrizAdyacencia[i][j] = new Isla("Null");
+                matrizAdyacencia[i][j] = new Isla(null);
             }
         }
 

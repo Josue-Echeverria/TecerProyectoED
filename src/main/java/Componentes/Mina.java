@@ -6,15 +6,17 @@ package Componentes;
 
 import Cliente.Pantalla;
 import Cliente.Cliente;
+import Cliente.Jugador;
 /**
  *
  * @author admin
  */
 public class Mina extends Componente{
     int precio;
+    public boolean esVisible;
     public ThreadMina thread;
-    public Mina(javax.swing.JLabel label,Cliente cliente,int segundos_en_producir,int kgs_acero_que_produce) {
-        thread = new ThreadMina(label,cliente,segundos_en_producir,kgs_acero_que_produce);
+    public Mina(Jugador jugador,int segundos_en_producir,int kgs_acero_que_produce) {
+        thread = new ThreadMina(jugador,segundos_en_producir,kgs_acero_que_produce);
         thread.start();
         precio = 1000;
     }

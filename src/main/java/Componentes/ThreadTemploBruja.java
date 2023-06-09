@@ -6,6 +6,8 @@ package Componentes;
 
 import Cliente.Pantalla;
 import Cliente.Cliente;
+import Cliente.Jugador;
+import java.util.Random;
 /**
  *
  * @author admin
@@ -14,17 +16,14 @@ public class ThreadTemploBruja extends Thread{
     TemploBruja templo_bruja;
     private boolean isRunning = true;
     private boolean isPaused = false;
-    private javax.swing.JLabel refPantalla;
+   // private javax.swing.JLabel refPantalla;
     private int contador = 0;
     private int contadorMinutos = 0;
-    private String segundos;
-    private String minutos;
-    private int contadorHoras = 0;
+     private int contadorHoras = 0;
     //CAMBIAR CLIENTE POR JUGADOR
-    public Cliente cliente;
-    public ThreadTemploBruja(javax.swing.JLabel refPantalla,Cliente cliente) {
-        this.refPantalla = refPantalla;
-        this.cliente = cliente;
+    public Jugador jugador;
+    public ThreadTemploBruja(Jugador jugador) {
+        this.jugador = jugador;
     } 
     @Override
     public void run(){
@@ -36,29 +35,11 @@ public class ThreadTemploBruja extends Thread{
                     contadorMinutos += 1;
                     contador = 0;
                 }
-                if (contadorMinutos == 60){
-                    contador = 0;
+                if(contadorMinutos == 1){//AQUI DEBERIA DE HABILITAR LOS COMODINES 
+                    Random random = new Random();
+                    jugador.comodin = random.nextInt(2) + 1;
+                    jugador.avisarComodinDisponible();
                     contadorMinutos = 0;
-                    contadorHoras  +=1;
-                }
-                if(contador < 10){
-                    
-                    segundos = ("0"+Integer.toString(contador));
-                }else{
-                    segundos = (Integer.toString(contador));
-                }
-                if(contadorMinutos < 10){
-                    
-                    minutos = ("0"+Integer.toString(contadorMinutos));
-                }else{
-                     minutos = (Integer.toString(contadorMinutos));
-                }
-                if(contadorMinutos == 5){//AQUI DEBERIA DE HABILITAR LOS COMODINES 
-                    cliente.puede_usar_comodin = true;
-                }else{/* AQUI DEBERIA DE SER DONDE MODIFICA LA INTERFAZ
-                    System.out.println(minutos+":"+segundos);
-                    refPantalla.lbCronometro.setText(minutos+":"+segundos);
-                    */
                 }
             } catch (InterruptedException ex) {
             }

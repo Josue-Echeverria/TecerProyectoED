@@ -10,6 +10,7 @@ package Componentes;
  */
 public class Mercado extends Componente{
     int precio;
+    public boolean esVisible;
     public Mercado() {
         precio = 2000;
     }

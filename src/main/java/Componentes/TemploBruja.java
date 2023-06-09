@@ -5,6 +5,7 @@
 package Componentes;
 
 import Cliente.Cliente;
+import Cliente.Jugador;
 import Cliente.Pantalla;
 
 
@@ -14,10 +15,11 @@ import Cliente.Pantalla;
  */
 public class TemploBruja extends Componente{
     int precio;
+    public boolean esVisible;
     ThreadTemploBruja thread_templo_bruja;
-    public TemploBruja(javax.swing.JLabel label,Cliente cliente) {
+    public TemploBruja(Jugador jugador) {
         precio = 2500;
-        thread_templo_bruja = new ThreadTemploBruja(label,cliente);
+        thread_templo_bruja = new ThreadTemploBruja(jugador);
         thread_templo_bruja.start();
     }
     

@@ -5,7 +5,10 @@
 package GUI;
 
 import Cliente.Cliente;
-import Cliente.Pantalla;
+import Cliente.Jugador;
+import Componentes.Mina;
+import Componentes.TemploBruja;
+import Mar.Isla;
 import Modelos.Mensaje;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,11 +18,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
-import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import java.io.IOException;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -28,6 +34,7 @@ import java.io.IOException;
 public class Play extends javax.swing.JFrame {
     private ArrayList<JLabel> labels;
     Cliente cliente;
+    TiendaComponentes tienda;
 
     /**
      * Creates new form Play
@@ -70,6 +77,19 @@ public class Play extends javax.swing.JFrame {
         historialPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        label_acero = new javax.swing.JLabel();
+        label_dinero = new javax.swing.JLabel();
+        button_comprar_componentes = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -261,15 +281,154 @@ public class Play extends javax.swing.JFrame {
 
         bg.add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 480, 110));
 
+        label_acero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
+        label_acero.setForeground(new java.awt.Color(255, 255, 255));
+        label_acero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_acero.setText("jLabel1");
+        label_acero.setToolTipText("");
+        label_acero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        label_acero.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        label_acero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_aceroMouseClicked(evt);
+            }
+        });
+        bg.add(label_acero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 60, 140, 30));
+
+        label_dinero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
+        label_dinero.setForeground(new java.awt.Color(255, 255, 255));
+        label_dinero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_dinero.setText("jLabel1");
+        label_dinero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        bg.add(label_dinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, 140, 30));
+
+        button_comprar_componentes.setText("Comprar componentes");
+        button_comprar_componentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_comprar_componentesActionPerformed(evt);
+            }
+        });
+        bg.add(button_comprar_componentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 760, 160, 40));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("jLabel1");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 800, 170, 30));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("jLabel1");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 800, 170, 30));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("jLabel1");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 760, 170, 30));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel1");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 760, 170, 30));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 790, -1, -1));
+
+        jButton3.setText("Comodin");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 760, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1202, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
 
         pack();
@@ -282,11 +441,81 @@ public class Play extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
+            if(comandoInput.getText().toUpperCase().equals("COMODIN")){
+                System.out.println(cliente.jugador.comodin);
+                if(cliente.jugador.comodin != 0){
+                    switch(cliente.jugador.comodin){
+                        case 1->{
+                            cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()+"-ESCUDO"));
+                            break;
+                        }
+                        case 2->{
+                            cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()+"-KRAKEN"));
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No tienes comodines", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            }else{
+                cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
+            }
+            
         } catch (IOException ex) {
             //Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void button_comprar_componentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_comprar_componentesActionPerformed
+        tienda = new TiendaComponentes();
+        tienda.setVisible(true);
+        tienda.setJugador(this.cliente.jugador);
+        tienda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_button_comprar_componentesActionPerformed
+
+    private void label_aceroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_aceroMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_label_aceroMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.cliente.jugador.cargar_arma("CANION");        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.cliente.jugador.cargar_arma("CANION MULTIPLE");
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.cliente.jugador.cargar_arma("BOMBA");
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        this.cliente.jugador.cargar_arma("CANION BARBA ROJA");
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        if(cliente.jugador.comodin != 0){
+            switch(cliente.jugador.comodin){
+                case 1->{
+                    Random random = new Random();
+                    this.cliente.jugador.escudos = random.nextInt(4)+2;
+                    cliente.jugador.comodin = 0;
+                    this.cliente.jugador.avisarEscudoActivo();
+                    break;
+                }
+                case 2->{//TO DO 
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No tienes comodines", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Mina(Jugador jugador,int segundos_en_producir,int kgs_acero_que_produce) {
+            this.cliente.jugador.grafo.agregarIsla(new Isla(new Mina(this.cliente.jugador,2,100)));
+            this.cliente.jugador.grafo.agregarIsla(new Isla(new TemploBruja(this.cliente.jugador)));
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,7 +593,17 @@ public class Play extends javax.swing.JFrame {
                 panelCuadriculaPlayer.add(label);
                 label.addMouseListener(new MouseAdapter(){  
                     public void mouseClicked(MouseEvent e){
-                        label.setText("X");
+                       // h = x;
+                        if(cliente.jugador.arma_cargada.disparar(0, 0) != -1){
+                            cliente.jugador.disparar_arma_cargada();
+                            /*try {
+                                cliente.salida.writeObject(new Mensaje(cliente.nombre, ));
+                            } catch (IOException ex) {
+                                Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
+                            }*/
+                            
+                            label.setText("X");
+                        }
                     }
                 });
                 //labels.add(label);
@@ -373,14 +612,28 @@ public class Play extends javax.swing.JFrame {
             y += 25;
         }    
     }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton button_comprar_componentes;
     private javax.swing.JTextField comandoInput;
     private javax.swing.JPanel historialPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel label_acero;
+    private javax.swing.JLabel label_dinero;
     private javax.swing.JPanel panelCuadricula;
     private javax.swing.JPanel panelCuadriculaPlayer;
     private javax.swing.JPanel player2Panel;
@@ -393,4 +646,34 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JPanel tituloPanel;
     private javax.swing.JPanel tituloPanel2;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getLabel_acero() {
+        return label_acero;
+    }
+
+    public JLabel getLabel_dinero() {
+        return label_dinero;
+    }
+
+    public JLabel getjLabel1() {//Canion
+        return jLabel1;
+    }
+
+    public JLabel getjLabel2() {//Canionmultiple
+        return jLabel2;
+    }
+
+    public JLabel getjLabel3() {//Bomba
+        return jLabel3;
+    }
+
+    public JLabel getjLabel4() {//Canion barba roja
+        return jLabel4;
+    }
+
+    //PROTOTYPES:
+    public void invocarKraken(){
+        
+    }
+    
 }

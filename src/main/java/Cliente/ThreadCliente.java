@@ -30,25 +30,42 @@ public class ThreadCliente extends Thread{
             this.cliente = cliente;
             entrada = new ObjectInputStream(socket.getInputStream());
         } catch (IOException ex) {
-            //Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void run(){
-        Mensaje mensaje;
         while(isrunnig){
-            
             try {
-                mensaje = (Mensaje) entrada.readObject();
-                cliente.pantalla.write(mensaje.toString());
-                
-                
-                
-                
+                Mensaje mensaje = (Mensaje) entrada.readObject();
+                if(mensaje.isjugador){
+                    this.cliente.jugador = mensaje.getJugador();
+                    this.cliente.jugador.setLabel_acero(cliente.pantalla.getLabel_acero());
+                    this.cliente.jugador.setLabel_dinero(cliente.pantalla.getLabel_dinero()); 
+                    this.cliente.jugador.label_acero.setText("Acero: "+this.cliente.jugador.acero);
+                    this.cliente.jugador.label_dinero.setText("Dinero: "+this.cliente.jugador.dinero);
+                    this.cliente.jugador.setBoton_bomba(cliente.pantalla.getjLabel3());
+                    this.cliente.jugador.setBoton_canion(cliente.pantalla.getjLabel1());
+                    this.cliente.jugador.setBoton_canion_multiple(cliente.pantalla.getjLabel2()); 
+                    this.cliente.jugador.setBoton_canion_barba_roja(cliente.pantalla.getjLabel4());
+                    this.cliente.jugador.actualizarArmas();
+                }else if(mensaje.isVenta()){
+                    String[] arregloMensaje = mensaje.getMensaje().split("-");
+                    cliente.jugador.recibirOferta(arregloMensaje[1],Integer.parseInt(arregloMensaje[2]),Integer.parseInt(arregloMensaje[4]),mensaje.getEnviador());
+                    if(cliente.jugador.acepto_oferta){
+                       cliente.salida.writeObject(new Mensaje(this.cliente.nombre,"COMPRAR-"+mensaje.getEnviador()+"-"+arregloMensaje[1]+"-"+Integer.parseInt(arregloMensaje[2])+"-"+Integer.parseInt(arregloMensaje[4])));
+                    }
+                }else if (mensaje.isCompra()){
+                    String[] arregloMensaje = mensaje.getMensaje().split("-");
+                    cliente.jugador.vender(arregloMensaje[2].toUpperCase(),Integer.parseInt(arregloMensaje[3]), Integer.parseInt(arregloMensaje[4]));
+                }else if(mensaje.isComodin()){
+                    
+                }else
+                    cliente.pantalla.write(mensaje.toString());
             } catch (IOException ex) {
-                //Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                //Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             
