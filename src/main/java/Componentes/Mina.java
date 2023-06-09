@@ -4,7 +4,6 @@
  */
 package Componentes;
 
-import Cliente.Pantalla;
 import Cliente.Cliente;
 import Cliente.Jugador;
 /**

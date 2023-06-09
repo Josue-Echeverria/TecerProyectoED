@@ -4,7 +4,7 @@
  */
 package Componentes;
 
-import Cliente.Pantalla;
+
 import Cliente.Cliente;
 import Cliente.Jugador;
 import java.util.Random;

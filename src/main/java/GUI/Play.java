@@ -81,6 +81,19 @@ public class Play extends javax.swing.JFrame {
         historialPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        label_acero = new javax.swing.JLabel();
+        label_dinero = new javax.swing.JLabel();
+        button_comprar_componentes = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         colorFuentePanel = new javax.swing.JPanel();
         colorMercadoPanel = new javax.swing.JPanel();
         colorConectorPanel = new javax.swing.JPanel();
@@ -93,21 +106,8 @@ public class Play extends javax.swing.JFrame {
         conectorLabel = new javax.swing.JLabel();
         minaLabel = new javax.swing.JLabel();
         temploLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         islaCombo = new javax.swing.JComboBox<>();
-        label_acero = new javax.swing.JLabel();
-        label_dinero = new javax.swing.JLabel();
-        button_comprar_componentes = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -299,6 +299,141 @@ public class Play extends javax.swing.JFrame {
 
         bg.add(historialPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 500, 110));
 
+        label_acero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
+        label_acero.setForeground(new java.awt.Color(255, 255, 255));
+        label_acero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_acero.setText("jLabel1");
+        label_acero.setToolTipText("");
+        label_acero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        label_acero.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        label_acero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_aceroMouseClicked(evt);
+            }
+        });
+        bg.add(label_acero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 60, 140, 30));
+
+        label_dinero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
+        label_dinero.setForeground(new java.awt.Color(255, 255, 255));
+        label_dinero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_dinero.setText("jLabel1");
+        label_dinero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        bg.add(label_dinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, 140, 30));
+
+        button_comprar_componentes.setText("Comprar componentes");
+        button_comprar_componentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_comprar_componentesActionPerformed(evt);
+            }
+        });
+        bg.add(button_comprar_componentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 390, 160, 40));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("jLabel1");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 350, 160, 30));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("jLabel1");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 270, 160, 30));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("jLabel1");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 230, 160, 30));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel1");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 310, 160, 30));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 440, -1, -1));
+
+        jButton3.setText("Comodin");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 440, -1, -1));
+
         colorFuentePanel.setBackground(new java.awt.Color(204, 0, 51));
         colorFuentePanel.setToolTipText("");
 
@@ -418,24 +553,24 @@ public class Play extends javax.swing.JFrame {
         temploLabel.setText("<=Templo");
         bg.add(temploLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 700, 100, 30));
 
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 500, 60, 40));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 520, 60, 40));
 
         islaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente", "Mercado", "Conector" }));
         islaCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -443,144 +578,7 @@ public class Play extends javax.swing.JFrame {
                 islaComboActionPerformed(evt);
             }
         });
-        bg.add(islaCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 420, -1, -1));
-
-        label_acero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
-        label_acero.setForeground(new java.awt.Color(255, 255, 255));
-        label_acero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_acero.setText("jLabel1");
-        label_acero.setToolTipText("");
-        label_acero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        label_acero.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        label_acero.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label_aceroMouseClicked(evt);
-            }
-        });
-        bg.add(label_acero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 60, 140, 30));
-
-        label_dinero.setFont(new java.awt.Font("Engravers MT", 2, 14)); // NOI18N
-        label_dinero.setForeground(new java.awt.Color(255, 255, 255));
-        label_dinero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_dinero.setText("jLabel1");
-        label_dinero.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        bg.add(label_dinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, 140, 30));
-
-        button_comprar_componentes.setText("Comprar componentes");
-        button_comprar_componentes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_comprar_componentesActionPerformed(evt);
-            }
-        });
-        bg.add(button_comprar_componentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 760, 160, 40));
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("jLabel1");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 800, 170, 30));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel1");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 800, 170, 30));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 760, 170, 30));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("jLabel1");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 760, 170, 30));
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 790, -1, -1));
-
-        jButton3.setText("Comodin");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 760, -1, -1));
+        bg.add(islaCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 480, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -592,7 +590,7 @@ public class Play extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
         );
 
         pack();
@@ -797,33 +795,35 @@ public class Play extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel armeriaLabel;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton button_comprar_componentes;
     private javax.swing.JPanel colorArmeriaPanel;
     private javax.swing.JPanel colorConectorPanel;
     private javax.swing.JPanel colorFuentePanel;
     private javax.swing.JPanel colorMercadoPanel;
     private javax.swing.JPanel colorMinaPanel;
     private javax.swing.JPanel colorTemploPanel;
-    private javax.swing.JButton button_comprar_componentes;
     private javax.swing.JTextField comandoInput;
     private javax.swing.JLabel conectorLabel;
     private javax.swing.JLabel fuenteLabel;
     private javax.swing.JPanel historialPanel;
     private javax.swing.JComboBox<String> islaCombo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel label_acero;
+    private javax.swing.JLabel label_dinero;
     private javax.swing.JLabel mercadoLabel;
     private javax.swing.JLabel minaLabel;
     private javax.swing.JPanel panelCuadricula;

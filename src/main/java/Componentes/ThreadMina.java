@@ -6,7 +6,7 @@ package Componentes;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
-import Cliente.Pantalla;
+
 import static java.lang.Thread.sleep;
 
 /**
