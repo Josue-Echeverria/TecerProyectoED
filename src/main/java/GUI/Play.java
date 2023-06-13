@@ -108,6 +108,7 @@ public class Play extends javax.swing.JFrame {
         temploLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         islaCombo = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -570,7 +571,7 @@ public class Play extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 520, 60, 40));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 520, 60, 40));
 
         islaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente", "Mercado", "Conector" }));
         islaCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -579,6 +580,25 @@ public class Play extends javax.swing.JFrame {
             }
         });
         bg.add(islaCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 480, -1, -1));
+
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3jPanel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -688,6 +708,12 @@ public class Play extends javax.swing.JFrame {
             this.cliente.jugador.grafo.agregarIsla(new Isla(new TemploBruja(this.cliente.jugador)));
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jPanel3jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3jPanel1MouseClicked
+        Graphics g = panelCuadricula.getGraphics();
+        
+        g.drawLine(0,0,250,250);
+    }//GEN-LAST:event_jPanel3jPanel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -745,7 +771,31 @@ public class Play extends javax.swing.JFrame {
                         String selecteditem = islaCombo.getSelectedItem().toString();
                         int sisX = label.getLocation().x;
                         int sisY = label.getLocation().y;
-                        labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                        switch(selecteditem){
+                            case "Fuente":
+                                labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                                labels[sisX/25 + 1][sisY/25].cambieColor(selecteditem);
+                                labels[sisX/25][sisY/25 - 1].cambieColor(selecteditem);
+                                labels[sisX/25 + 1][sisY/25 - 1].cambieColor(selecteditem);
+                                break;
+                            case "Conector":
+                                labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                                break;
+                            case "Mercado":
+                                String pos = posicionIsla();
+                                if("1x2".equals(pos)){
+                                    labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                                    labels[sisX/25][sisY/25 + 1].cambieColor(selecteditem);
+                                }
+                                if("2x1".equals(pos)){
+                                    labels[sisX/25][sisY/25].cambieColor(selecteditem);
+                                    labels[sisX/25 + 1][sisY/25].cambieColor(selecteditem);
+                                }
+                                break;
+                                
+                        }
+                         
+                        
                     }
                 });
                 y += 25;
@@ -759,7 +809,7 @@ public class Play extends javax.swing.JFrame {
         int x = 0;
         int y = 0;
         for (int i = 0; i < 20; i++){
-            x = 0;
+            y = 0;
             for(int j = 0; j < 20; j++){
                 // Label de dígitos
                 JLabel label = new JLabel("", SwingConstants.CENTER);     
@@ -786,10 +836,24 @@ public class Play extends javax.swing.JFrame {
                     }
                 });
                 //labels.add(label);
-                x += 25;
+                y += 25;
             }
-            y += 25;
+            x += 25;
         }    
+    }
+     
+    String posicionIsla(){
+        String name;
+        while(true){
+            name = JOptionPane.showInputDialog(null, "Ingrese si desea colocarla 1x2 o 2x1");
+            System.out.println(name);
+            if((!"2x1".equals(name)) && (!"1x2".equals(name)) && (!"cancelar".equals(name)) && (name != null)){
+                JOptionPane.showMessageDialog(null, "Por favor ingresa 1x2, 2x1","ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                return name;
+            }
+        }
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -816,6 +880,7 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
