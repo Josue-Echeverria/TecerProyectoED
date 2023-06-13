@@ -21,5 +21,10 @@ public class TemploBruja extends Componente{
         thread_templo_bruja = new ThreadTemploBruja(jugador);
         thread_templo_bruja.start();
     }
+
+    @Override
+    public String getNombre() {
+        return "el templo de bruja";
+    }
     
 }

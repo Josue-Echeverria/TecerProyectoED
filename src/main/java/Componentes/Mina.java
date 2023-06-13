@@ -19,4 +19,9 @@ public class Mina extends Componente{
         thread.start();
         precio = 1000;
     }
+
+    @Override
+    public String getNombre() {
+        return "la mina";
+    }
 }

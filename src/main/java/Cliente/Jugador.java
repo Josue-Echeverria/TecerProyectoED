@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author admin
  */
+
 public class Jugador implements Serializable{
+    
     public int acero;
     public javax.swing.JLabel label_acero;
     public int dinero;
@@ -34,9 +37,10 @@ public class Jugador implements Serializable{
     private javax.swing.JLabel boton_canion_barba_roja;
     public int bomba = 10;
     private javax.swing.JLabel boton_bomba;
+    public javax.swing.JTextArea bitacora;
     
     public GrafoIslas grafo;
-    
+    private int disparos_barba_roja;
     public boolean tiene_mercado;    
     public String nombre;
     public boolean puede_colocar_mercado = false;
@@ -57,9 +61,24 @@ public class Jugador implements Serializable{
         dinero = 100000;
         this.arma_cargada = new Armas() {
             @Override
-            public int disparar(int x, int y) {
+            public Armas disparar() {
+                return null;
+            }
+            @Override
+            public void setXY(int x, int y) {
+            }
+            @Override
+            public int getX() {
                 return -1;
             }
+            @Override
+            public int getY() {
+                return -1;
+            }
+            @Override
+            public String getName() {
+                return "";
+        }
         };
         grafo = new GrafoIslas();
      //   comodin = 0;
@@ -214,15 +233,45 @@ public class Jugador implements Serializable{
         }
     }
     
-    public void disparar_arma_cargada(){
-        this.arma_cargada.disparar(0,0);
-        this.arma_cargada = new Armas() {
-            public int disparar(int x, int y) {
-                return -1;
+    public void restarArma(String nombre){
+        switch(nombre.toUpperCase()){
+            case "CANION" -> {
+                this.canion--;
+                break;
             }
-        };
-        JOptionPane.showMessageDialog(null, "Has disparado en la posicion: ("+0+","+0+")", "Aviso", JOptionPane.WARNING_MESSAGE);
-        
+            case "CANION MULTIPLE" -> {
+                this.canion_multiple--;
+                break;
+            }
+            case "BOMBA" -> {
+                this.bomba--;
+                break;
+            }
+            case "CANION BARBA ROJA" -> {
+                this.canion_barba_roja--;
+                break;
+            }
+        }
+    }
+    
+    //deberia de restar a la arma que tenia cargada
+    public void disparar_arma_cargada(){
+        this.bitacora.append("Has disparado " + arma_cargada.getName()+" en la posicion: ("+arma_cargada.getX()+","+arma_cargada.getY()+")\n");
+        String name = arma_cargada.getName();
+        this.arma_cargada = arma_cargada.disparar();
+        if(this.arma_cargada.getX() == -1){
+            restarArma(name);
+            actualizarArmas();
+        }
+    }
+    
+    public Isla recibir_disparo(int x, int y){
+        Isla isla = this.grafo.islaEnPos(x, y);
+        if(isla != null){
+            return grafo.borrarIsla(isla);
+        }else{
+            return null;
+        }
     }
     
     
@@ -273,7 +322,7 @@ public class Jugador implements Serializable{
         this.label_dinero.setText("Dinero: "+this.dinero);
     }
     public void actualizar_acero(){
-        this.label_dinero.setText("Acero: "+this.acero);
+        this.label_acero.setText("Acero: "+this.acero);
     }
     public void jugadorInexistente(){
         JOptionPane.showMessageDialog(null, "El jugador no existe", "Error", JOptionPane.ERROR_MESSAGE);
@@ -294,4 +343,13 @@ public class Jugador implements Serializable{
         JOptionPane.showMessageDialog(null, "Has utilizado el comodin de escudos ahora eres inmune a "+this.escudos+" disparos", "Aviso", JOptionPane.WARNING_MESSAGE);
 
     }
+
+    public JTextArea getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(JTextArea bitacora) {
+        this.bitacora = bitacora;
+    }
+    
 }

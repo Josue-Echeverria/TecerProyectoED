@@ -5,6 +5,8 @@
 package Modelos;
 
 import Cliente.Jugador;
+import Componentes.Armas;
+import Mar.Isla;
 import java.io.Serializable;
 
 /**
@@ -26,6 +28,16 @@ public class Mensaje implements Serializable{
     //Si el mensaje es un jugador
     public boolean isjugador;
 
+    //Si el mensaje es un disparo
+    public boolean isdisparo;
+    public boolean is_confirmation_hit;
+    public boolean hit;
+    String nombre_isla;
+    String nombre_arma;
+    int x;
+    int y;
+    
+    
     public boolean isCompra() {
         return compra;
     }
@@ -63,9 +75,31 @@ public class Mensaje implements Serializable{
         this.compra = false;        
         this.jugador = jugador;
     }
+    public Mensaje(String enviador,String nombre,int x, int y){//cuando se envia un disparo entre jugadores 
+        this.nombre_arma = nombre;
+        this.x = x;
+        this.y = y;
+        this.enviador = enviador;
+        this.isdisparo = true;
+        this.isjugador = false;
+        this.venta = false;
+        this.compra = false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
     
     public boolean isVenta() {
         return venta;
+    }
+
+    public String getNombre_arma() {
+        return nombre_arma;
     }
 
     public void setVenta(boolean venta) {
@@ -133,6 +167,14 @@ public class Mensaje implements Serializable{
     
     public String toStringCompra(){
         return "Compra de " + enviador + ": " + mensaje;
+    }
+
+    public String getNombre_isla() {
+        return nombre_isla;
+    }
+
+    public void setNombre_isla(String nombre_isla) {
+        this.nombre_isla = nombre_isla;
     }
     
     

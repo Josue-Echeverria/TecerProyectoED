@@ -14,7 +14,9 @@ public class Mercado extends Componente{
     public Mercado() {
         precio = 2000;
     }
-    
 
-
+    @Override
+    public String getNombre() {
+        return "el mercado";
+    }
 }

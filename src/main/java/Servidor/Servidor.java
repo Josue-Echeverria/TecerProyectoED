@@ -18,7 +18,7 @@ public class Servidor {
     private final int PORT = 8084;
     ServerSocket server;
     public PantallaServidor pantalla;
-     ArrayList<ThreadServidor> threadsClientesAceptados;
+    ArrayList<ThreadServidor> threadsClientesAceptados;
     ArrayList<Jugador> jugadores;
     ServerConnectionsThread conexionsThread;
     public ProcesadorMensaje lector;
@@ -66,6 +66,15 @@ public class Servidor {
         }
     }
     
+    public void enviarDisparo(Mensaje mensaje_disparo){//El mensaje deberia venir con el mae que va recibir el pichaso
+        ThreadServidor victima = this.bucarCliente("222");
+        System.out.println(victima.jugador.acero);
+        try {
+            victima.salida.writeObject(mensaje_disparo);
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void privateMessage(Mensaje mensaje){
         

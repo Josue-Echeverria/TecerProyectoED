@@ -21,11 +21,12 @@ import java.util.logging.Logger;
  */
 public class ThreadServidor extends Thread{
     public Socket socket;
+    public Jugador jugador;
     private Servidor server;
     private ObjectInputStream entrada;
     private DataInputStream entradaDatos;
-     ObjectOutputStream salida;
-     String nombre;
+    ObjectOutputStream salida;
+    String nombre;
     
     private boolean isRunning = true;
 
@@ -47,6 +48,7 @@ public class ThreadServidor extends Thread{
         try {
             nombre = entradaDatos.readUTF(); // lee el nombre
             Jugador nuevo = new Jugador(nombre);
+            this.jugador = nuevo;
             Mensaje mensaje_jugador = new Mensaje(nuevo);
             server.pantalla.write("Recibido nombre: " + mensaje_jugador.getJugador().nombre);
             server.jugadores.add(nuevo);    
@@ -56,23 +58,22 @@ public class ThreadServidor extends Thread{
         }
 
         while (isRunning){
-        try {
             try {
-                mensaje = (Mensaje) entrada.readObject();         
-                server.broadcoast(mensaje);
-                
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Error: " + ex.getMessage());
+                try {
+
+                    mensaje = (Mensaje) entrada.readObject();       
+                    if(mensaje.isdisparo){
+                        System.out.println("("+mensaje.getX()+","+mensaje.getY()+")");
+                        server.enviarDisparo(mensaje);
+                    }else
+                    server.broadcoast(mensaje);
+
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Error: " + ex.getMessage());
+                }
+
+            } catch (IOException ex) {}
+
             }
-            
-        } catch (IOException ex) {}
-        
-        }
-        
-        
     }
-    
-    
-    
-    
 }

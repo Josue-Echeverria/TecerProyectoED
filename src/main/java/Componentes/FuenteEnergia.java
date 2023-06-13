@@ -8,7 +8,7 @@ package Componentes;
  *
  * @author lmaag
  */
-public class FuenteEnergia {
+public class FuenteEnergia extends Componente{
     private int precio;  // Precio de la fuente de energía
     private boolean destruido;  // Indica si les destruyeron la fuente
     private int posicionX;  // Ubicación en el mar X
@@ -40,6 +40,11 @@ public class FuenteEnergia {
 
     public void setPosicionY(int posicionY) {
         this.posicionY = posicionY;
+    }
+
+    @Override
+    public String getNombre() {
+        return "la fuente de energia";
     }
 
     

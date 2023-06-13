@@ -6,6 +6,7 @@ package GUI;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
+import Componentes.Armas;
 import Componentes.Mina;
 import Componentes.TemploBruja;
 import Mar.Isla;
@@ -29,6 +30,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -75,7 +77,8 @@ public class Play extends javax.swing.JFrame {
         player4Panel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         textoPanel = new javax.swing.JPanel();
-        textoLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_bitacora = new javax.swing.JTextArea();
         comandoInput = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         historialPanel = new javax.swing.JPanel();
@@ -248,15 +251,20 @@ public class Play extends javax.swing.JFrame {
         textoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 153, 153)));
         textoPanel.setForeground(new java.awt.Color(204, 204, 204));
 
+        jTextArea_bitacora.setEditable(false);
+        jTextArea_bitacora.setColumns(20);
+        jTextArea_bitacora.setRows(5);
+        jScrollPane2.setViewportView(jTextArea_bitacora);
+
         javax.swing.GroupLayout textoPanelLayout = new javax.swing.GroupLayout(textoPanel);
         textoPanel.setLayout(textoPanelLayout);
         textoPanelLayout.setHorizontalGroup(
             textoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
         textoPanelLayout.setVerticalGroup(
             textoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
         );
 
         bg.add(textoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, 500, 170));
@@ -704,8 +712,14 @@ public class Play extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Mina(Jugador jugador,int segundos_en_producir,int kgs_acero_que_produce) {
-            this.cliente.jugador.grafo.agregarIsla(new Isla(new Mina(this.cliente.jugador,2,100)));
-            this.cliente.jugador.grafo.agregarIsla(new Isla(new TemploBruja(this.cliente.jugador)));
+        Isla isla1 = new Isla(new Mina(this.cliente.jugador,2,100));
+        isla1.setX(1);
+        isla1.setY(1);
+        Isla isla2 = new Isla(new Mina(this.cliente.jugador,2,100));
+        isla2.setX(19);
+        isla2.setY(19);
+            this.cliente.jugador.grafo.agregarIsla(isla1);
+            this.cliente.jugador.grafo.agregarIsla(isla2);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel3jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3jPanel1MouseClicked
@@ -749,7 +763,7 @@ public class Play extends javax.swing.JFrame {
         });
     }
     
-    private void generarLabels(){
+    private void generarLabels(){//yo 
         Border blackline = BorderFactory.createLineBorder(Color.black);
         int x = 0;
         int y = 0;
@@ -804,7 +818,7 @@ public class Play extends javax.swing.JFrame {
         }    
     }
 
-     private void generarLabelsPlayer(){
+     private void generarLabelsPlayer(){//Enemigo
         Border blackline = BorderFactory.createLineBorder(Color.black);
         int x = 0;
         int y = 0;
@@ -822,20 +836,23 @@ public class Play extends javax.swing.JFrame {
                 panelCuadriculaPlayer.add(label);
                 label.addMouseListener(new MouseAdapter(){  
                     public void mouseClicked(MouseEvent e){
-                       // h = x;
-                        if(cliente.jugador.arma_cargada.disparar(0, 0) != -1){
-                            cliente.jugador.disparar_arma_cargada();
-                            /*try {
-                                cliente.salida.writeObject(new Mensaje(cliente.nombre, ));
+                        if(cliente.jugador.arma_cargada.getX() != -1){
+                            String selecteditem = islaCombo.getSelectedItem().toString();
+                            int sisX = label.getLocation().x;
+                            int sisY = label.getLocation().y;
+                            cliente.jugador.arma_cargada.setXY(sisX/25, sisY/25);
+                            try {
+                                cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getX(),cliente.jugador.arma_cargada.getY()));
                             } catch (IOException ex) {
                                 Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
-                            }*/
-                            
+                            }
+                            cliente.jugador.disparar_arma_cargada();
                             label.setText("X");
+                        }else{
+                            JOptionPane.showMessageDialog(null, "No tienes ningun arma cargada", "Aviso", JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 });
-                //labels.add(label);
                 y += 25;
             }
             x += 25;
@@ -886,7 +903,9 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea_bitacora;
     private javax.swing.JLabel label_acero;
     private javax.swing.JLabel label_dinero;
     private javax.swing.JLabel mercadoLabel;
@@ -897,7 +916,6 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JPanel player3Panel;
     private javax.swing.JPanel player4Panel;
     private javax.swing.JLabel temploLabel;
-    private javax.swing.JLabel textoLabel;
     private javax.swing.JPanel textoPanel;
     private javax.swing.JLabel tituloLabel;
     private javax.swing.JLabel tituloLabel2;
@@ -929,9 +947,21 @@ public class Play extends javax.swing.JFrame {
         return jLabel4;
     }
 
-    //PROTOTYPES:
+    public void recibirDisparo(String enviador,String nombre,int x, int y){        
+        this.labels[x][y].setText("X");
+        this.jTextArea_bitacora.append("Has recibido un disparo de un "+nombre+" de "+ enviador+ " en la posicion ("+x+","+y+")\n");
+    }
+//PROTOTYPES:
     public void invocarKraken(){
         
+    }
+
+    public JTextArea getjTextArea_bitacora() {
+        return jTextArea_bitacora;
+    }
+
+    public void setjTextArea_bitacora(JTextArea jTextArea_bitacora) {
+        this.jTextArea_bitacora = jTextArea_bitacora;
     }
     
 }

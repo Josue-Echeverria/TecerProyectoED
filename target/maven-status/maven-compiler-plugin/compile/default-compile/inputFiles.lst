@@ -1,26 +1,26 @@
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Componente.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\ThreadTemploBruja.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\ThreadMina.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Mar\Territorios.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Armas.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Modelos\Mensaje.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\GUI\Matriz.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Conector.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Servidor\PantallaServidor.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\GUI\Play.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Mercado.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\GUI\TiendaComponentes.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Mina.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Servidor\ProcesadorMensaje.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Servidor\ThreadServidor.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\FuenteEnergia.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Cliente\Cliente.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Mar\GrafoIslas.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Servidor\ServerConnectionsThread.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Cliente\ThreadCliente.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\Armeria.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Modelos\TipoMensaje.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Mar\Isla.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Servidor\Servidor.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Cliente\Jugador.java
-C:\Users\hdani\OneDrive\Escritorio\Tec semestre 1\datos\Proyecto3\TecerProyectoED\src\main\java\Componentes\TemploBruja.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Mina.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Servidor\PantallaServidor.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Mercado.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Cliente\ThreadCliente.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\GUI\Matriz.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Servidor\ServerConnectionsThread.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Mar\GrafoIslas.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Mar\Territorios.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Armeria.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Conector.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Componente.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\ThreadTemploBruja.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Servidor\Servidor.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Modelos\Mensaje.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Cliente\Jugador.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\GUI\Play.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Modelos\TipoMensaje.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Mar\Isla.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Servidor\ThreadServidor.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Servidor\ProcesadorMensaje.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\FuenteEnergia.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\Armas.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\GUI\TiendaComponentes.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\ThreadMina.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Cliente\Cliente.java
+C:\Users\admin\Desktop\TecerProyectoED\src\main\java\Componentes\TemploBruja.java

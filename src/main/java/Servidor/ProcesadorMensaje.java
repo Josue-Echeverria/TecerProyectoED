@@ -27,8 +27,6 @@ public class ProcesadorMensaje {
     public String leeMensaje(Mensaje mensaje_recibido) throws IOException{
         arregloMensaje = mensaje_recibido.getMensaje().split("-");
         switch (arregloMensaje[0].toUpperCase()) {
-            case "DISPARAR":
-                return "Disparo a: ";
             case "VENDER":// ejemplo: VENDER-ACERO-10000-JUGADOR-500
                           // (COMANDO)-(VENDIENDO)-(CANTIDAD VENDIENDO)-(POSIBLE COMPRADOR)-(PRECIO)
                 Jugador jugador_vendiendo = this.server.buscarJugador(mensaje_recibido.getEnviador());

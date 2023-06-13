@@ -10,7 +10,7 @@ package Componentes;
  */
 import Mar.Isla; 
         
-public class Conector {
+public class Conector extends Componente{
     private Isla isla1;
     private Isla isla2;
 
@@ -34,6 +34,11 @@ public class Conector {
     public void setIsla2(Isla isla2) {
         this.isla2 = isla2;
     }
+
+    @Override
+    public String getNombre() {
+        return "un conector";
+        }
     
     
 }

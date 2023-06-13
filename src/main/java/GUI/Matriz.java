@@ -40,4 +40,8 @@ public class Matriz {
                 break;
         }
     }
+    
+    public void setText(String text){
+        this.label.setText(text);
+    }
 }

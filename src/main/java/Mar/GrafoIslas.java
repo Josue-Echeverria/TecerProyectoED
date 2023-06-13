@@ -25,7 +25,7 @@ public class GrafoIslas implements Serializable {
 
     public void agregarIsla(Isla isla) {
         islas.add(isla);
-        conexiones.add(new ArrayList<>());
+        conexiones.add(new ArrayList<Conector>());
     }
 
     public void agregarConexion(Conector conector) {
@@ -69,7 +69,39 @@ public class GrafoIslas implements Serializable {
                 matrizAdyacencia[indice1][indice2] = matrizAdyacencia[indice2][indice1] = isla1;
             }
         }
-
         return matrizAdyacencia;
     }
+    
+    public Isla islaEnPos(int x,int y){
+        for(Isla isla : this.islas){
+            if((isla.getX() == x) && (isla.getY() == y)){
+                return isla;
+            }
+        }
+        return null;
+    }
+    
+    public Isla borrarIsla(Isla isla){
+        if(islas.contains(isla)){
+            for(Isla tmp : islas){
+                borrarConexion(islas.indexOf(tmp),isla);
+            }
+            conexiones.remove(islas.indexOf(isla));
+            islas.remove(isla);
+            return isla;
+        }
+        return null;
+    }
+    
+    
+    
+    public void borrarConexion(int index, Isla islaEliminar ){
+        List<Conector> conectores = conexiones.get(index);
+        for(Conector conector : conectores){
+            if(conector.getIsla2() == islaEliminar){
+                conector.setIsla2(null);
+            }
+        }
+    }
+    
 }

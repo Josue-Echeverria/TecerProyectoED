@@ -56,4 +56,10 @@ public class Armeria extends Componente{
         }
         return null;
     }
+
+    @Override
+    public String getNombre() {
+        return "la armeria";
+    }
+    
 }

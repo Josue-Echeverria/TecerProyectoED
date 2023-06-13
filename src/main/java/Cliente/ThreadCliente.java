@@ -48,6 +48,7 @@ public class ThreadCliente extends Thread{
                     this.cliente.jugador.setBoton_canion(cliente.pantalla.getjLabel1());
                     this.cliente.jugador.setBoton_canion_multiple(cliente.pantalla.getjLabel2()); 
                     this.cliente.jugador.setBoton_canion_barba_roja(cliente.pantalla.getjLabel4());
+                    this.cliente.jugador.setBitacora(this.cliente.pantalla.getjTextArea_bitacora());
                     this.cliente.jugador.actualizarArmas();
                 }else if(mensaje.isVenta()){
                     String[] arregloMensaje = mensaje.getMensaje().split("-");
@@ -58,8 +59,8 @@ public class ThreadCliente extends Thread{
                 }else if (mensaje.isCompra()){
                     String[] arregloMensaje = mensaje.getMensaje().split("-");
                     cliente.jugador.vender(arregloMensaje[2].toUpperCase(),Integer.parseInt(arregloMensaje[3]), Integer.parseInt(arregloMensaje[4]));
-                }else if(mensaje.isComodin()){
-                    
+                }else if(mensaje.isdisparo){
+                    cliente.recibirDisparo(mensaje);
                 }else
                     cliente.pantalla.write(mensaje.toString());
             } catch (IOException ex) {

@@ -9,5 +9,5 @@ package Componentes;
  * @author admin
  */
 public abstract class Componente {
-    
+    public abstract String getNombre();
 }
