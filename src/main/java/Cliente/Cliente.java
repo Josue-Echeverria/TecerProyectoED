@@ -57,44 +57,105 @@ public class Cliente {
             
             salidaDatos.writeUTF(nombre);
         } catch (IOException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Servidor lleno imposible conectar", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     public void recibirDisparo(Mensaje mensaje){//
         if(mensaje.is_confirmation_hit){
-            if(mensaje.hit){
-                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+") y se volo "+mensaje.getNombre_isla() +"\n");
-            }else{
-                this.jugador.bitacora.append("Se fallo el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+")\n");
-            }
+            escribirDisparoEnBitacora(mensaje);
         }else{
-            this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(),mensaje.getX(),mensaje.getY());
-            Isla victima = this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
-            if(victima != null){
-                if(mensaje.getNombre_arma().toUpperCase().equals("CANION MULTIPLE")){
-                    for(int i = 0; i <4;i++){
-                        Random random = new Random();
-                        int randomX = random.nextInt(20);
-                        int randomY = random.nextInt(20);
-                        this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(),randomX,randomY);
-                        this.jugador.recibir_disparo(randomX,randomY);
-                    }
+            if(mensaje.getNombre_arma().equals("Bomba")){
+                this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(), mensaje.bomba_xys);
+                Isla victima = null;
+                for(int i = 0; i <2;i++){
+                    victima = this.jugador.recibir_disparo( mensaje.bomba_xys[i], mensaje.bomba_xys[i+1]);
+                    if(victima != null)
+                        break;
                 }
-                mensaje.is_confirmation_hit = true;
-                mensaje.hit = true;
-                mensaje.setNombre_isla(victima.componente.getNombre());
-
+                if(victima != null){
+                    mensaje.bomba_xys[0] = victima.getX();
+                    mensaje.bomba_xys[1] = victima.getY();
+                    mensaje.is_confirmation_hit = true;
+                    mensaje.hit = true;
+                    mensaje.setNombre_isla(victima.componente.getNombre());
+                    this.pantalla.disparoAcertado(victima.componente.getNombre());
+                }else{
+                    mensaje.is_confirmation_hit = true;
+                    mensaje.hit = false;
+                    this.pantalla.disparoFallado();
+                }
             }else{
-                mensaje.is_confirmation_hit = true;
-                mensaje.hit = false;
+                this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(),mensaje.getX(),mensaje.getY());
+                Isla victima = this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
+                if(victima != null){
+                    if(mensaje.getNombre_arma().toUpperCase().equals("CANION MULTIPLE")){
+                        for(int i = 0; i <4;i++){
+                            Random random = new Random();
+                            int randomX = random.nextInt(20);
+                            int randomY = random.nextInt(20);
+                            this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(),randomX,randomY);
+                            this.jugador.recibir_disparo(randomX,randomY);
+                        }
+                    }
+                    mensaje.is_confirmation_hit = true;
+                    mensaje.hit = true;
+                    mensaje.setNombre_isla(victima.componente.getNombre());
+                    this.pantalla.disparoAcertado(victima.componente.getNombre());
+
+                }else{
+                    this.pantalla.disparoFallado();
+                    mensaje.is_confirmation_hit = true;
+                    mensaje.hit = false;
+                }
             }
+            mensaje.setReceptor(mensaje.getEnviador());
             try {
                     this.salida.writeObject(mensaje);
-                } catch (IOException ex) {
+            } catch (IOException ex) {
                     Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }
         }
+    }
+    
+    public void recibirNewPlayers(ArrayList<String> nombres){
+        this.pantalla.disablePlayerButtons();
+        for(String newplayername :nombres){
+            System.out.println(newplayername);
+            if(newplayername.equals(this.nombre)){
+                continue;
+            }
+            if(!this.pantalla.getjButton_player1().isEnabled()){
+                this.pantalla.getjButton_player1().setText(newplayername);
+                this.pantalla.getjButton_player1().setEnabled(true);
+                continue;
+            }
+            if(!this.pantalla.getjButton_player2().isEnabled()){
+                this.pantalla.getjButton_player2().setText(newplayername);
+                this.pantalla.getjButton_player2().setEnabled(true);
+                continue;            
+            }
+            if(!this.pantalla.getjButton_player3().isEnabled()){
+                this.pantalla.getjButton_player3().setText(newplayername);
+                this.pantalla.getjButton_player3().setEnabled(true);
+                continue;
+            }
+        }
+    }
+    public void escribirDisparoEnBitacora(Mensaje mensaje){
+        if(mensaje.getNombre_arma().equals("Bomba")){
+            if(mensaje.hit)
+                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.bomba_xys[0]+","+mensaje.bomba_xys[1]+") y se volo "+mensaje.getNombre_isla() +"\n");
+            else
+                this.jugador.bitacora.append("Se fallo la bomba en las posiciones ("+mensaje.bomba_xys[0]+","+mensaje.bomba_xys[1]+") y ("+mensaje.bomba_xys[2]+","+mensaje.bomba_xys[3]+")\n");
+        }else{
+            if(mensaje.hit)
+                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+") y se volo "+mensaje.getNombre_isla() +"\n");
+            else
+                this.jugador.bitacora.append("Se fallo el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+")\n");
+        }
+    }
+    public void iniciar_partida(){
         
     }
 }

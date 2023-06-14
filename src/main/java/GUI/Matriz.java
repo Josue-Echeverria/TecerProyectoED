@@ -7,14 +7,17 @@ package GUI;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import java.io.Serializable;
+
 
 /**
  *
  * @author hdani
  */
-public class Matriz {
-    private JLabel label;
-    private int tipo; //   0 = vacio, 1 = fuente, 2 = mercado, 3 = conector, 4 = mina, 5 = templo, 6 = armeria.
+public class Matriz implements Serializable{
+    public JLabel label;
+    public int tipo = 0 ; //   0 = vacio, 1 = fuente, 2 = mercado, 3 = conector, 4 = mina, 5 = templo, 6 = armeria.
+   
     public Matriz(JLabel label) {
         this.label = label;
         this.tipo = 0;

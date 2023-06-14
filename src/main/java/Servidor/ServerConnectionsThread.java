@@ -25,12 +25,13 @@ public class ServerConnectionsThread extends Thread{
         while (isRunning) {            
             try {
                 server.pantalla.write("Esperando cliente ... ");
-                
-                Socket socket = server.server.accept();
-                ThreadServidor ts = new ThreadServidor(socket, server);
-                ts.start();
-                server.threadsClientesAceptados.add(ts);
-                server.pantalla.write("Cliente conectado");
+               // if(server.threadsClientesAceptados.size() < 4){
+                    Socket socket = server.server.accept();
+                    ThreadServidor ts = new ThreadServidor(socket, server);
+                    ts.start();
+                    server.threadsClientesAceptados.add(ts);
+                    server.pantalla.write("Cliente conectado");
+                //}
                 
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());

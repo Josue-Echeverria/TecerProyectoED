@@ -29,7 +29,9 @@ import GUI.Matriz;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
@@ -37,7 +39,9 @@ import javax.swing.JTextArea;
  * @author hdani
  */
 public class Play extends javax.swing.JFrame {
-    private Matriz[][] labels;
+    public Matriz[][] labels;
+    
+    public Matriz[][] labelsEnemigos;
     Cliente cliente;
     TiendaComponentes tienda;
 
@@ -48,12 +52,13 @@ public class Play extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         labels = new Matriz [20][20];
+        labelsEnemigos = new Matriz [20][20];        
         generarLabels();
         generarLabelsPlayer();
         cliente = new Cliente(this);
     }
+    
     public void write(String text){
-        
         this.jTextArea1.append(text + "\n");
     }
     /**
@@ -88,13 +93,13 @@ public class Play extends javax.swing.JFrame {
         label_dinero = new javax.swing.JLabel();
         button_comprar_componentes = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel_canion_barba_roja = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_multiple = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_canion = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel_bomba = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         colorFuentePanel = new javax.swing.JPanel();
@@ -112,6 +117,10 @@ public class Play extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         islaCombo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
+        jButton_player2 = new javax.swing.JButton();
+        jButton_player1 = new javax.swing.JButton();
+        jButton_player3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -337,11 +346,12 @@ public class Play extends javax.swing.JFrame {
         });
         bg.add(button_comprar_componentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 390, 160, 40));
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("jLabel1");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_canion_barba_roja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_canion_barba_roja.setText("jLabel1");
+        jLabel_canion_barba_roja.setEnabled(false);
+        jLabel_canion_barba_roja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLabel_canion_barba_rojaMouseClicked(evt);
             }
         });
 
@@ -349,20 +359,21 @@ public class Play extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jLabel_canion_barba_roja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel_canion_barba_roja, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         bg.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 350, 160, 30));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel1");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_multiple.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_multiple.setText("jLabel1");
+        jLabel_multiple.setEnabled(false);
+        jLabel_multiple.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabel_multipleMouseClicked(evt);
             }
         });
 
@@ -372,20 +383,21 @@ public class Play extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel_multiple, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel_multiple, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 270, 160, 30));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_canion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_canion.setText("jLabel1");
+        jLabel_canion.setEnabled(false);
+        jLabel_canion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                jLabel_canionMouseClicked(evt);
             }
         });
 
@@ -395,22 +407,23 @@ public class Play extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel_canion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_canion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 230, 160, 30));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("jLabel1");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_bomba.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_bomba.setText("jLabel1");
+        jLabel_bomba.setEnabled(false);
+        jLabel_bomba.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabel_bombaMouseClicked(evt);
             }
         });
 
@@ -418,11 +431,11 @@ public class Play extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jLabel_bomba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel_bomba, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 310, 160, 30));
@@ -608,6 +621,41 @@ public class Play extends javax.swing.JFrame {
 
         bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 520, -1, -1));
 
+        jButton_player2.setText("Player 1");
+        jButton_player2.setEnabled(false);
+        jButton_player2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_player2ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton_player2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 130, 150, 30));
+
+        jButton_player1.setText("Player 1");
+        jButton_player1.setEnabled(false);
+        jButton_player1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_player1ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton_player1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 100, 150, 30));
+
+        jButton_player3.setText("Player 1");
+        jButton_player3.setEnabled(false);
+        jButton_player3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_player3ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton_player3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 160, 150, 30));
+
+        jButton4.setText("Iniciar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 200, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -675,21 +723,41 @@ public class Play extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_label_aceroMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        this.cliente.jugador.cargar_arma("CANION");        
-    }//GEN-LAST:event_jLabel1MouseClicked
+    private void jLabel_canionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_canionMouseClicked
+        if(this.jLabel_canion.isEnabled()){
+            if(this.cliente.jugador.canion > 0)
+                this.cliente.jugador.cargar_arma("CANION");        
+            else
+                JOptionPane.showMessageDialog(null, "No tienes caniones en tu inventario", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jLabel_canionMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        this.cliente.jugador.cargar_arma("CANION MULTIPLE");
-    }//GEN-LAST:event_jLabel2MouseClicked
+    private void jLabel_multipleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_multipleMouseClicked
+        if(this.jLabel_multiple.isEnabled()){
+            if(this.cliente.jugador.canion_multiple > 0)
+                this.cliente.jugador.cargar_arma("CANION MULTIPLE");
+            else
+                JOptionPane.showMessageDialog(null, "No tienes caniones multiples en tu inventario", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jLabel_multipleMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.cliente.jugador.cargar_arma("BOMBA");
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void jLabel_bombaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_bombaMouseClicked
+        if(this.jLabel_bomba.isEnabled()){
+            if(this.cliente.jugador.bomba > 0)
+                this.cliente.jugador.cargar_arma("BOMBA");
+            else
+                JOptionPane.showMessageDialog(null, "No tienes bombas en tu inventario", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jLabel_bombaMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        this.cliente.jugador.cargar_arma("CANION BARBA ROJA");
-    }//GEN-LAST:event_jLabel4MouseClicked
+    private void jLabel_canion_barba_rojaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_canion_barba_rojaMouseClicked
+        if(this.jLabel_canion_barba_roja.isEnabled()){
+            if(this.cliente.jugador.canion_barba_roja > 0)
+                this.cliente.jugador.cargar_arma("CANION BARBA ROJA");
+            else
+                JOptionPane.showMessageDialog(null, "No tienes caniones barba roja en tu inventario", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jLabel_canion_barba_rojaMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
@@ -727,6 +795,45 @@ public class Play extends javax.swing.JFrame {
         
         g.drawLine(0,0,250,250);
     }//GEN-LAST:event_jPanel3jPanel1MouseClicked
+
+    private void jButton_player2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_player2ActionPerformed
+        try {
+            this.cliente.salida.writeObject(new Mensaje(this.cliente.nombre,true,this.jButton_player2.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_player2ActionPerformed
+
+    private void jButton_player1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_player1ActionPerformed
+        try {
+            this.cliente.salida.writeObject(new Mensaje(this.cliente.nombre,true,this.jButton_player1.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_player1ActionPerformed
+
+    private void jButton_player3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_player3ActionPerformed
+        try {
+            this.cliente.salida.writeObject(new Mensaje(this.cliente.nombre,true,this.jButton_player3.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_player3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        this.jLabel_bomba.setEnabled(true);
+        this.jLabel_multiple.setEnabled(true);
+        this.jLabel_canion.setEnabled(true);
+        this.jLabel_canion_barba_roja.setEnabled(true);
+        this.jButton4.setVisible(false);
+        /*this.remove(this.jButton4);
+        try {
+            this.cliente.salida.writeObject(new Mensaje(true));
+        } catch (IOException ex) {
+            Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -778,8 +885,6 @@ public class Play extends javax.swing.JFrame {
                 label.setBackground(Color.blue);
                 label.setBorder(blackline);
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                panelCuadricula.add(label);
-                labels[i][j] = new Matriz(label);
                 label.addMouseListener(new MouseAdapter(){  
                     public void mouseClicked(MouseEvent e){
                         String selecteditem = islaCombo.getSelectedItem().toString();
@@ -806,12 +911,11 @@ public class Play extends javax.swing.JFrame {
                                     labels[sisX/25 + 1][sisY/25].cambieColor(selecteditem);
                                 }
                                 break;
-                                
                         }
-                         
-                        
                     }
                 });
+                panelCuadricula.add(label);
+                labels[i][j] = new Matriz(label);
                 y += 25;
             }
             x += 25;
@@ -833,26 +937,37 @@ public class Play extends javax.swing.JFrame {
                 label.setBackground(Color.blue);
                 label.setBorder(blackline);
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                panelCuadriculaPlayer.add(label);
                 label.addMouseListener(new MouseAdapter(){  
                     public void mouseClicked(MouseEvent e){
                         if(cliente.jugador.arma_cargada.getX() != -1){
                             String selecteditem = islaCombo.getSelectedItem().toString();
                             int sisX = label.getLocation().x;
                             int sisY = label.getLocation().y;
-                            cliente.jugador.arma_cargada.setXY(sisX/25, sisY/25);
                             try {
-                                cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getX(),cliente.jugador.arma_cargada.getY()));
+                                if(cliente.jugador.arma_cargada.getName().equals("Bomba")){
+                                    cliente.jugador.arma_cargada.setXY(posicion_disparo(sisX/25,sisY/25));
+                                    label.setText("X");
+                                    labelsEnemigos[cliente.jugador.arma_cargada.getXY()[2]][cliente.jugador.arma_cargada.getXY()[3]].setText("X");
+                                    cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.target,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getXY()));                                
+                                }else{
+                                    cliente.jugador.arma_cargada.setXY(sisX/25, sisY/25);
+                                    label.setText("X");    
+                                    cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.target,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getX(),cliente.jugador.arma_cargada.getY()));
+                                }
+                            
                             } catch (IOException ex) {
                                 Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
+
                             cliente.jugador.disparar_arma_cargada();
-                            label.setText("X");
                         }else{
                             JOptionPane.showMessageDialog(null, "No tienes ningun arma cargada", "Aviso", JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 });
+                panelCuadriculaPlayer.add(label);
+                labelsEnemigos[i][j] = new Matriz(label);
                 y += 25;
             }
             x += 25;
@@ -860,17 +975,49 @@ public class Play extends javax.swing.JFrame {
     }
      
     String posicionIsla(){
-        String name;
+        String[] options = { "1x2", "2x1"};
         while(true){
-            name = JOptionPane.showInputDialog(null, "Ingrese si desea colocarla 1x2 o 2x1");
-            System.out.println(name);
-            if((!"2x1".equals(name)) && (!"1x2".equals(name)) && (!"cancelar".equals(name)) && (name != null)){
-                JOptionPane.showMessageDialog(null, "Por favor ingresa 1x2, 2x1","ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                return name;
+            int selectedOption = JOptionPane.showOptionDialog(
+                null,
+                "Seleccione la orientacion del mercado",
+                "Custom Options",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[0]
+            );
+
+            if (selectedOption != JOptionPane.CLOSED_OPTION) {
+                return options[selectedOption];
             }
         }
+    }
+    
+
+    
+    int[] posicion_disparo(int x, int y){
+        Random random = new Random();
+        int randomPos = random.nextInt(4);
+        switch(randomPos){
+            case 0 ->{
+                int[] positions = {x,y,x,y+1};
+                return positions;
+            }
+            case 1 ->{
+                int[] positions = {x,y,x+1,y};
+                return positions;
+            }
+            case 2 ->{
+                int[] positions = {x,y,x-1,y};
+                return positions;
+            }
+            case 3 ->{
+                int[] positions = {x,y,x,y-1};
+                return positions;
+            }
+        }
+        return null;
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -891,10 +1038,14 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton_player1;
+    private javax.swing.JButton jButton_player2;
+    private javax.swing.JButton jButton_player3;
+    private javax.swing.JLabel jLabel_bomba;
+    private javax.swing.JLabel jLabel_canion;
+    private javax.swing.JLabel jLabel_canion_barba_roja;
+    private javax.swing.JLabel jLabel_multiple;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -932,24 +1083,35 @@ public class Play extends javax.swing.JFrame {
     }
 
     public JLabel getjLabel1() {//Canion
-        return jLabel1;
+        return jLabel_canion;
     }
 
     public JLabel getjLabel2() {//Canionmultiple
-        return jLabel2;
+        return jLabel_multiple;
     }
 
     public JLabel getjLabel3() {//Bomba
-        return jLabel3;
+        return jLabel_bomba;
     }
 
     public JLabel getjLabel4() {//Canion barba roja
-        return jLabel4;
+        return jLabel_canion_barba_roja;
     }
 
     public void recibirDisparo(String enviador,String nombre,int x, int y){        
         this.labels[x][y].setText("X");
         this.jTextArea_bitacora.append("Has recibido un disparo de un "+nombre+" de "+ enviador+ " en la posicion ("+x+","+y+")\n");
+    }
+    public void recibirDisparo(String enviador, String nombre, int[] xys){
+        this.labels[xys[0]][xys[1]].setText("X");
+        this.labels[xys[2]][xys[3]].setText("X");
+        this.jTextArea_bitacora.append("Has recibido una bomba de "+ enviador+ " en las posiciones ("+xys[0]+","+xys[1]+") y ("+xys[2]+","+xys[3]+")\n");
+    }
+    public void disparoFallado(){
+        this.jTextArea_bitacora.append("Y fallo xD\n");
+    }
+    public void disparoAcertado(String nombreIsla){
+        this.jTextArea_bitacora.append("Y se volo "+nombreIsla+" xD\n");
     }
 //PROTOTYPES:
     public void invocarKraken(){
@@ -963,5 +1125,54 @@ public class Play extends javax.swing.JFrame {
     public void setjTextArea_bitacora(JTextArea jTextArea_bitacora) {
         this.jTextArea_bitacora = jTextArea_bitacora;
     }
+
+    public JButton getjButton_player1() {
+        return jButton_player1;
+    }
+
+    public JButton getjButton_player2() {
+        return jButton_player2;
+    }
+
+    public JButton getjButton_player3() {
+        return jButton_player3;
+    }
+   public void disablePlayerButtons(){
+       jButton_player1.setEnabled(false);
+       jButton_player2.setEnabled(false);
+       jButton_player3.setEnabled(false);
+   }
+
+    public JPanel getPanelCuadricula() {
+        return panelCuadricula;
+    }
+
+    public void setPanelCuadricula(JPanel panelCuadricula) {
+        this.panelCuadricula = panelCuadricula;
+    }
+
+    public JPanel getPanelCuadriculaPlayer() {
+        return panelCuadriculaPlayer;
+    }
+
+    public void setPanelCuadriculaPlayer(JPanel panelCuadriculaPlayer) {
+        this.panelCuadriculaPlayer = panelCuadriculaPlayer;
+    }
     
+    public void iniciar_partida(){
+        this.jLabel_bomba.setEnabled(true);
+        this.jLabel_multiple.setEnabled(true);
+        this.jLabel_canion.setEnabled(true);
+        this.jLabel_canion_barba_roja.setEnabled(true);
+    }
+    
+    public void setCuadricula(Matriz[][] cuadriculaEntrada){
+        this.panelCuadriculaPlayer.removeAll();
+        for(int i = 0; i<20;i++){
+            for(int j = 0; j<20; j++){
+                System.out.println(cuadriculaEntrada[i][j].tipo);
+                panelCuadriculaPlayer.add(cuadriculaEntrada[i][j].label);
+            }
+        }
+    }
 }

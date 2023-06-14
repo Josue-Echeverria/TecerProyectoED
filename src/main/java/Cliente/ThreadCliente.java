@@ -61,6 +61,17 @@ public class ThreadCliente extends Thread{
                     cliente.jugador.vender(arregloMensaje[2].toUpperCase(),Integer.parseInt(arregloMensaje[3]), Integer.parseInt(arregloMensaje[4]));
                 }else if(mensaje.isdisparo){
                     cliente.recibirDisparo(mensaje);
+                }else if (mensaje.isSolicitudPlayer){
+                    mensaje.isRespuestaPlayer = true;
+                    mensaje.isSolicitudPlayer = false;
+                    mensaje.playerName = this.cliente.nombre;
+                    mensaje.cuadricula = this.cliente.pantalla.labels;
+                    cliente.salida.writeObject(mensaje);
+                }else if(mensaje.isNewPlayer){
+                    this.cliente.recibirNewPlayers(mensaje.playersConnected);
+                }else if (mensaje.isRespuestaPlayer){
+                    this.cliente.jugador.target = mensaje.playerName;
+                    //this.cliente.pantalla.setCuadricula(mensaje.cuadricula);
                 }else
                     cliente.pantalla.write(mensaje.toString());
             } catch (IOException ex) {

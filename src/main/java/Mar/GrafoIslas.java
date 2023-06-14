@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Componentes.Conector;
 import java.io.Serializable;
+import java.util.HashSet;
 public class GrafoIslas implements Serializable {
 
     private List<Isla> islas;
@@ -103,5 +104,41 @@ public class GrafoIslas implements Serializable {
             }
         }
     }
-    
+    /*
+    public ArrayList<ArrayList<Isla>> caminos(Isla inicio, Isla fin) {
+        HashSet<Isla> visitados = new HashSet<>();
+        ArrayList<Isla> caminoActual = new ArrayList<>();
+        ArrayList<ArrayList<Isla>> caminosEncontrados = new ArrayList<>();
+        encontrarCaminos(inicio, fin, visitados, caminoActual, caminosEncontrados);
+        return caminosEncontrados;
+    }
+
+    private void encontrarCaminos(Isla nodoActual, Isla fin, HashSet<Isla> visitados, 
+        ArrayList<Isla> caminoActual, ArrayList<ArrayList<Isla>> caminosEncontrados) {
+
+        visitados.add(nodoActual);
+        caminoActual.add(nodoActual);
+
+        if (nodoActual.equals(fin)) {
+            caminosEncontrados.add(new ArrayList<>(caminoActual));
+        }
+
+        if (grafo.containsKey(nodoActual)) {
+            for (Isla vecino : grafo.get(nodoActual)) {
+                if (!visitados.contains(vecino)) {
+                    encontrarCaminos(vecino, fin, visitados, caminoActual, caminosEncontrados);
+                }
+            }
+        }
+
+        visitados.remove(nodoActual);
+        caminoActual.remove(caminoActual.size() - 1);
+    }
+
+    public ArrayList<Isla> getDestinos(Isla origen) {
+        if (grafo.containsKey(origen)) {
+            return grafo.get(origen);
+        }
+        return null;
+    }   */
 }

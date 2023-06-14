@@ -6,8 +6,10 @@ package Modelos;
 
 import Cliente.Jugador;
 import Componentes.Armas;
+import GUI.Matriz;
 import Mar.Isla;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,22 +18,37 @@ import java.io.Serializable;
 public class Mensaje implements Serializable{
     private String enviador;
     private String mensaje;
+    
+    //
+    public boolean iniciar_partida = false;
+    public boolean request_iniciar_partida = false;
+    //Cuanddo un jugador se conecta
+    public ArrayList<String> playersConnected;
+    public boolean isNewPlayer = false;
+    
+    //Para el boton de cada user
+    public boolean isSolicitudPlayer = false;
+    public boolean isRespuestaPlayer = false;
+    public String playerName;
+    public Matriz cuadricula[][];
+
     //Si el mensaje es un comodin
-    private boolean comodin;
+    private boolean comodin = false;
     
     //Si el mensaje es una compra 
-    private boolean compra;
+    private boolean compra = false;
     
     //Si el mensaje es una venta de bienes:
-    private boolean venta;
+    private boolean venta = false;
     
     //Si el mensaje es un jugador
     public boolean isjugador;
 
     //Si el mensaje es un disparo
-    public boolean isdisparo;
-    public boolean is_confirmation_hit;
-    public boolean hit;
+    public boolean isdisparo = false;
+    public boolean is_confirmation_hit = false;
+    public boolean hit = false;
+    public int[] bomba_xys;
     String nombre_isla;
     String nombre_arma;
     int x;
@@ -75,17 +92,33 @@ public class Mensaje implements Serializable{
         this.compra = false;        
         this.jugador = jugador;
     }
-    public Mensaje(String enviador,String nombre,int x, int y){//cuando se envia un disparo entre jugadores 
+    public Mensaje(String enviador,String Victima,String nombre,int x, int y){//cuando se envia un disparo entre jugadores 
         this.nombre_arma = nombre;
         this.x = x;
         this.y = y;
         this.enviador = enviador;
+        this.receptor = Victima;
         this.isdisparo = true;
-        this.isjugador = false;
-        this.venta = false;
-        this.compra = false;
     }
-
+    public Mensaje(String enviador,String Victima,String nombre,int[] xys){
+        this.nombre_arma = nombre;
+        this.bomba_xys = xys;
+        this.enviador = enviador;
+        this.receptor = Victima;
+        this.isdisparo = true;
+    }
+    public Mensaje(String solicitante, boolean solicitudMatriz, String Nombre){
+        this.isSolicitudPlayer = true;
+        this.enviador = solicitante;
+        this.playerName = Nombre;
+    }
+    public Mensaje (boolean isPlayerConnecting, ArrayList<String> nombres){
+        this.isNewPlayer = true;
+        this.playersConnected = nombres;
+    }
+    public Mensaje(boolean inicio_partida){
+        this.request_iniciar_partida = inicio_partida;
+    }
     public int getX() {
         return x;
     }

@@ -52,6 +52,7 @@ public class ThreadServidor extends Thread{
             Mensaje mensaje_jugador = new Mensaje(nuevo);
             server.pantalla.write("Recibido nombre: " + mensaje_jugador.getJugador().nombre);
             server.jugadores.add(nuevo);    
+            server.mensajeTodos(new Mensaje(true,server.getNombresClientes()));
             this.salida.writeObject(mensaje_jugador);
         } catch (IOException ex) {
             Logger.getLogger(ThreadServidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,14 +61,15 @@ public class ThreadServidor extends Thread{
         while (isRunning){
             try {
                 try {
-
                     mensaje = (Mensaje) entrada.readObject();       
                     if(mensaje.isdisparo){
-                        System.out.println("("+mensaje.getX()+","+mensaje.getY()+")");
                         server.enviarDisparo(mensaje);
+                    }else if (mensaje.isSolicitudPlayer){
+                        server.requestPlayer(mensaje);
+                    }else if (mensaje.isRespuestaPlayer){
+                        server.sendPlayer(mensaje);
                     }else
-                    server.broadcoast(mensaje);
-
+                        server.broadcoast(mensaje);
                 } catch (ClassNotFoundException ex) {
                     System.out.println("Error: " + ex.getMessage());
                 }

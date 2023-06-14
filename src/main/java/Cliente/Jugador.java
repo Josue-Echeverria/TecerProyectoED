@@ -52,7 +52,7 @@ public class Jugador implements Serializable{
     public Armeria armas;
     public boolean admin;
     public Isla[][] matriz;
-    
+    public String target;
     
     public Jugador(String nombre){
         this.nombre = nombre;
@@ -79,6 +79,16 @@ public class Jugador implements Serializable{
             public String getName() {
                 return "";
         }
+
+            @Override
+            public void setXY(int[] pos) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public int[] getXY() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
         };
         grafo = new GrafoIslas();
      //   comodin = 0;
@@ -256,7 +266,7 @@ public class Jugador implements Serializable{
     
     //deberia de restar a la arma que tenia cargada
     public void disparar_arma_cargada(){
-        this.bitacora.append("Has disparado " + arma_cargada.getName()+" en la posicion: ("+arma_cargada.getX()+","+arma_cargada.getY()+")\n");
+        escribirDisparoBitacora();
         String name = arma_cargada.getName();
         this.arma_cargada = arma_cargada.disparar();
         if(this.arma_cargada.getX() == -1){
@@ -285,6 +295,13 @@ public class Jugador implements Serializable{
                 }
             }
         }
+    }
+    
+    void escribirDisparoBitacora(){
+        if(arma_cargada.getName().equals("Bomba"))
+            this.bitacora.append("Has explotado una bomba en las posiciones ("+arma_cargada.getXY()[0]+","+arma_cargada.getXY()[1]+") y ("+arma_cargada.getXY()[2]+","+arma_cargada.getXY()[3]+")\n");
+        else
+            this.bitacora.append("Has disparado " + arma_cargada.getName()+" en la posicion: ("+arma_cargada.getX()+","+arma_cargada.getY()+")\n");
     }
     public JLabel getLabel_acero() {
         return label_acero;

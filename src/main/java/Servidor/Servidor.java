@@ -67,8 +67,7 @@ public class Servidor {
     }
     
     public void enviarDisparo(Mensaje mensaje_disparo){//El mensaje deberia venir con el mae que va recibir el pichaso
-        ThreadServidor victima = this.bucarCliente("222");
-        System.out.println(victima.jugador.acero);
+        ThreadServidor victima = this.bucarCliente(mensaje_disparo.getReceptor());
         try {
             victima.salida.writeObject(mensaje_disparo);
         } catch (IOException ex) {
@@ -100,7 +99,8 @@ public class Servidor {
        
             }
         }
-        this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
+        if(!mensaje.isNewPlayer)
+            this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
     }
     
     Jugador buscarJugador(String nombre){
@@ -119,4 +119,37 @@ public class Servidor {
         return null;
     }
     
+    public void requestPlayer(Mensaje mensaje){
+        for(ThreadServidor cliente  : threadsClientesAceptados) {
+            if(mensaje.playerName.toUpperCase().equals(cliente.nombre.toUpperCase())){
+                try {
+                    cliente.salida.writeObject(mensaje);
+                    return;
+                } catch (IOException ex) {
+                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public void sendPlayer(Mensaje mensaje){
+         for(ThreadServidor cliente  : threadsClientesAceptados) {
+            if(mensaje.getEnviador().toUpperCase().equals(cliente.nombre.toUpperCase())){
+                try {
+                    cliente.salida.writeObject(mensaje);
+                    return;
+                } catch (IOException ex) {
+                    Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public ArrayList<String> getNombresClientes(){
+        ArrayList<String> listaNombres = new ArrayList<String>();
+        for (ThreadServidor cliente  : threadsClientesAceptados) {
+            listaNombres.add(cliente.nombre);
+        }
+        return listaNombres;
+    }
 }
