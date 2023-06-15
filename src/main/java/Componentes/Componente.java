@@ -4,10 +4,12 @@
  */
 package Componentes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public abstract class Componente {
+public abstract class Componente implements Serializable {
     public abstract String getNombre();
 }

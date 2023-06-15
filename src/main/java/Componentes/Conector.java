@@ -9,8 +9,9 @@ package Componentes;
  * @author lmaag
  */
 import Mar.Isla; 
+import java.io.Serializable;
         
-public class Conector extends Componente{
+public class Conector extends Componente implements Serializable{
     private Isla isla1;
     private Isla isla2;
 

@@ -32,6 +32,9 @@ public class Mensaje implements Serializable{
     public String playerName;
     public Matriz cuadricula[][];
 
+    
+    
+    
     //Si el mensaje es un comodin
     private boolean comodin = false;
     
@@ -49,7 +52,8 @@ public class Mensaje implements Serializable{
     public boolean is_confirmation_hit = false;
     public boolean hit = false;
     public int[] bomba_xys;
-    String nombre_isla;
+  //  String nombre_isla;
+    public ArrayList<ArrayList<Integer>> islasAfectadas = new ArrayList<>();
     String nombre_arma;
     int x;
     int y;
@@ -116,8 +120,8 @@ public class Mensaje implements Serializable{
         this.isNewPlayer = true;
         this.playersConnected = nombres;
     }
-    public Mensaje(boolean inicio_partida){
-        this.request_iniciar_partida = inicio_partida;
+    public Mensaje(boolean inicio_partida_request){
+        this.request_iniciar_partida = inicio_partida_request;
     }
     public int getX() {
         return x;
@@ -201,14 +205,14 @@ public class Mensaje implements Serializable{
     public String toStringCompra(){
         return "Compra de " + enviador + ": " + mensaje;
     }
-
+/*
     public String getNombre_isla() {
         return nombre_isla;
     }
 
     public void setNombre_isla(String nombre_isla) {
         this.nombre_isla = nombre_isla;
-    }
+    }*/
     
     
     

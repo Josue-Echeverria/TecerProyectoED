@@ -72,6 +72,8 @@ public class ThreadCliente extends Thread{
                 }else if (mensaje.isRespuestaPlayer){
                     this.cliente.jugador.target = mensaje.playerName;
                     //this.cliente.pantalla.setCuadricula(mensaje.cuadricula);
+                }else if(!mensaje.request_iniciar_partida){
+                    this.cliente.pantalla.iniciar_partida();
                 }else
                     cliente.pantalla.write(mensaje.toString());
             } catch (IOException ex) {

@@ -4,6 +4,8 @@
  */
 package Componentes;
 
+import java.io.Serializable;
+
 /**@author admin
  * TODO:
  * METODO COMPRAR_ARMA DEBERIA DE RECIBIR EL JUGADOR EN VEZ DEL HIERRO PARA RESTARLE EL HIERRO QUE CUESTA LA ARMA DE UN SOLO
@@ -17,7 +19,7 @@ package Componentes;
     2 = Bomba
     3 = CanionBarbaRoja
 */
-public class Armeria extends Componente{
+public class Armeria extends Componente implements Serializable{
     int precio;
     int tipo;
     public Armeria(int tipo) {

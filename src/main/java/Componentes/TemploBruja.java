@@ -6,13 +6,14 @@ package Componentes;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
+import java.io.Serializable;
 
 
 /**
  *
  * @author admin
  */
-public class TemploBruja extends Componente{
+public class TemploBruja extends Componente implements Serializable{
     int precio;
     public boolean esVisible;
     ThreadTemploBruja thread_templo_bruja;

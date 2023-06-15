@@ -67,19 +67,21 @@ public class Cliente {
         }else{
             if(mensaje.getNombre_arma().equals("Bomba")){
                 this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(), mensaje.bomba_xys);
-                Isla victima = null;
+                this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
+                ArrayList<ArrayList<Integer>> victima = null;
                 for(int i = 0; i <2;i++){
                     victima = this.jugador.recibir_disparo( mensaje.bomba_xys[i], mensaje.bomba_xys[i+1]);
-                    if(victima != null)
+                    if(!victima.isEmpty())
                         break;
                 }
                 if(victima != null){
-                    mensaje.bomba_xys[0] = victima.getX();
-                    mensaje.bomba_xys[1] = victima.getY();
+                    mensaje.bomba_xys[0] = victima.get(0).get(0);
+                    mensaje.bomba_xys[1] = victima.get(0).get(1);
                     mensaje.is_confirmation_hit = true;
                     mensaje.hit = true;
-                    mensaje.setNombre_isla(victima.componente.getNombre());
-                    this.pantalla.disparoAcertado(victima.componente.getNombre());
+                   // mensaje.setNombre_isla(victima.get(0).componente.getNombre());
+                    mensaje.islasAfectadas = victima;
+                    this.pantalla.disparoAcertado(intToTipo(victima.get(0).get(2)));
                 }else{
                     mensaje.is_confirmation_hit = true;
                     mensaje.hit = false;
@@ -87,7 +89,9 @@ public class Cliente {
                 }
             }else{
                 this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(),mensaje.getX(),mensaje.getY());
-                Isla victima = this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
+               
+                ArrayList<ArrayList<Integer>> victima = this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
+               
                 if(victima != null){
                     if(mensaje.getNombre_arma().toUpperCase().equals("CANION MULTIPLE")){
                         for(int i = 0; i <4;i++){
@@ -100,8 +104,9 @@ public class Cliente {
                     }
                     mensaje.is_confirmation_hit = true;
                     mensaje.hit = true;
-                    mensaje.setNombre_isla(victima.componente.getNombre());
-                    this.pantalla.disparoAcertado(victima.componente.getNombre());
+                   // mensaje.setNombre_isla(victima.get(0).componente.getNombre());
+                    mensaje.islasAfectadas = victima;
+                    this.pantalla.disparoAcertado(intToTipo(victima.get(0).get(2)));
 
                 }else{
                     this.pantalla.disparoFallado();
@@ -111,9 +116,9 @@ public class Cliente {
             }
             mensaje.setReceptor(mensaje.getEnviador());
             try {
-                    this.salida.writeObject(mensaje);
+                this.salida.writeObject(mensaje);
             } catch (IOException ex) {
-                    Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -145,17 +150,41 @@ public class Cliente {
     public void escribirDisparoEnBitacora(Mensaje mensaje){
         if(mensaje.getNombre_arma().equals("Bomba")){
             if(mensaje.hit)
-                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.bomba_xys[0]+","+mensaje.bomba_xys[1]+") y se volo "+mensaje.getNombre_isla() +"\n");
+                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.bomba_xys[0]+","+mensaje.bomba_xys[1]+") y se volo "+intToTipo(mensaje.islasAfectadas.get(0).get(2)) +"\n");
             else
                 this.jugador.bitacora.append("Se fallo la bomba en las posiciones ("+mensaje.bomba_xys[0]+","+mensaje.bomba_xys[1]+") y ("+mensaje.bomba_xys[2]+","+mensaje.bomba_xys[3]+")\n");
         }else{
             if(mensaje.hit)
-                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+") y se volo "+mensaje.getNombre_isla() +"\n");
+                this.jugador.bitacora.append("Se acerto el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+") y se volo "+intToTipo(mensaje.islasAfectadas.get(0).get(2)) +"\n");
             else
                 this.jugador.bitacora.append("Se fallo el disparo en la posicion ("+mensaje.getX()+","+mensaje.getY()+")\n");
         }
     }
     public void iniciar_partida(){
         
+    }
+    String intToTipo(int entero){
+        switch(entero){
+            case 0->{
+                return "la fuente de energia";
+            }
+            case 1->{
+                return "el conector";
+            }
+            case 2->{
+                return "el mercado";
+            }
+            case 3->{
+                return "la mina";
+            }
+            case 4->{
+                return "el templo de bruja";
+            }
+            case 5->{
+                return "la armeria";
+            }
+            
+        }
+        return null;
     }
 }

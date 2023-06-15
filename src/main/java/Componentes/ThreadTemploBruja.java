@@ -7,12 +7,13 @@ package Componentes;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
+import java.io.Serializable;
 import java.util.Random;
 /**
  *
  * @author admin
  */
-public class ThreadTemploBruja extends Thread{
+public class ThreadTemploBruja extends Thread implements Serializable{
     TemploBruja templo_bruja;
     private boolean isRunning = true;
     private boolean isPaused = false;

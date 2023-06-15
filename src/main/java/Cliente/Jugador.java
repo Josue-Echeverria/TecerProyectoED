@@ -6,10 +6,15 @@ package Cliente;
 
 import Componentes.Armas;
 import Componentes.Armeria;
+import Componentes.Conector;
+import Componentes.FuenteEnergia;
+import Componentes.Mercado;
 import Mar.GrafoIslas;
 import Mar.Isla;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,8 +43,8 @@ public class Jugador implements Serializable{
     public int bomba = 10;
     private javax.swing.JLabel boton_bomba;
     public javax.swing.JTextArea bitacora;
-    
-    public GrafoIslas grafo;
+    public boolean tieneMercado;
+ //   public GrafoIslas grafo;
     private int disparos_barba_roja;
     public boolean tiene_mercado;    
     public String nombre;
@@ -48,10 +53,11 @@ public class Jugador implements Serializable{
     public boolean puede_colocar_mina = false;
     public boolean puede_colocar_templo = false;
     public int escudos = 0;
-    public GrafoIslas grafos;
+    // GrafoIslas grafos;
     public Armeria armas;
     public boolean admin;
-    public Isla[][] matriz;
+    public GrafoIslas grafo = new GrafoIslas();
+    public Isla[][] matriz = new Isla[20][20];
     public String target;
     
     public Jugador(String nombre){
@@ -59,6 +65,9 @@ public class Jugador implements Serializable{
         acero = 100000;
         this.comodin = 1;
         dinero = 100000;
+        this.matriz = iniciarMatriz(matriz);
+        this.grafo = iniciarGrafo(grafo, matriz);
+    
         this.arma_cargada = new Armas() {
             @Override
             public Armas disparar() {
@@ -78,7 +87,7 @@ public class Jugador implements Serializable{
             @Override
             public String getName() {
                 return "";
-        }
+            }
 
             @Override
             public void setXY(int[] pos) {
@@ -90,16 +99,73 @@ public class Jugador implements Serializable{
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         };
-        grafo = new GrafoIslas();
+       /// grafo = new GrafoIslas();
      //   comodin = 0;
     }
-    public Jugador(GrafoIslas grafos, Armeria armas, boolean admin) {
-        this.grafos = grafos;
-        this.armas = armas;
-        this.admin = admin;
-        this.matriz = this.grafos.generarMatrizAdyacencia();
-    }
+    
 
+    private GrafoIslas iniciarGrafo(GrafoIslas grafo, Isla[][] matriz) {
+        Isla fuenteEnergia = null;
+        Isla mercado = null;
+        for (Isla[] matriz1 : matriz) {
+            for (Isla matriz11 : matriz1) {
+                if (matriz11 != null) {
+                    Isla islaActual = matriz11;
+                    Isla conector = new Isla(islaActual.getConector());
+                    fuenteEnergia = new Isla(conector.getFuenteEner());
+                    mercado = new Isla(conector.getMercadito());
+                    grafo.agregarArista(conector, fuenteEnergia);
+                    grafo.agregarArista(fuenteEnergia, conector);
+                    grafo.agregarArista(conector, mercado);
+                    grafo.agregarArista(mercado, conector);
+                }
+            }
+        }
+        return grafo;
+    }
+    private Isla[][] iniciarMatriz(Isla[][] matriz) {
+        int xFuente = generarRandomX();
+        int yFuente = generarRandomY();
+        FuenteEnergia fuenteEner = new FuenteEnergia();
+        Isla nuevo = new Isla(xFuente, yFuente, fuenteEner);
+
+        int xMercado = generarRandomX();
+        int yMercado = generarRandomY();
+
+        while (Math.abs(xMercado - xFuente) <= 2 && Math.abs(yMercado - yFuente) <= 2) {
+            xMercado = generarRandomX();
+            yMercado = generarRandomY();
+        }
+        Mercado mercado = new Mercado();
+        Isla nuevo1 = new Isla(xMercado, yMercado, mercado);
+
+        int xConector = generarRandomX();
+        int yConector = generarRandomY();
+
+        while ((Math.abs(xConector - xFuente) <= 2 && Math.abs(yConector - yFuente) <= 2) ||
+               (Math.abs(xConector - xMercado) <= 2 && Math.abs(yConector - yMercado) <= 2)) {
+            xConector = generarRandomX();
+            yConector = generarRandomY();
+        }
+        Conector conector = new Conector(nuevo, nuevo1);
+        Isla nuevo2 = new Isla(xConector, yConector, conector);
+        
+        matriz[xFuente][yFuente] = nuevo;
+        matriz[xMercado][yMercado] = nuevo1;
+        matriz[xConector][yConector] = nuevo2;
+        return matriz;
+    }
+    
+    public int generarRandomX(){
+        Random random = new Random();
+        int x = random.nextInt(20);
+        return x;
+    }
+    public int generarRandomY(){
+        Random random = new Random();
+        int y = random.nextInt(20);
+        return y;
+    }
     /*
     Confirma si se tiene suficiente de lo que quiere vender
     */
@@ -210,7 +276,7 @@ public class Jugador implements Serializable{
                 this.canion_barba_roja -= cantidad;
                 actualizarArmas();
                 actualizar_dinero();
-            } 
+            }
         }
     }
     
@@ -275,13 +341,23 @@ public class Jugador implements Serializable{
         }
     }
     
-    public Isla recibir_disparo(int x, int y){
-        Isla isla = this.grafo.islaEnPos(x, y);
+    public ArrayList<ArrayList<Integer>> recibir_disparo(int x, int y){
+        Isla isla = this.grafo.buscarIslaPorCoordenadas(x, y);
+        ArrayList<Isla> temp;
+        ArrayList<ArrayList<Integer>> aaa = new ArrayList<>();
         if(isla != null){
-            return grafo.borrarIsla(isla);
-        }else{
-            return null;
+            if(isla.componente.getNombre().equals("un conector")||isla.componente.getNombre().equals("una fuente de energia")){
+                temp = this.grafo.getDestinos(isla);
+                temp.add(grafo.borrarIsla(isla));
+                for(Isla islatemp : temp){
+                    aaa.add(new ArrayList<>(Arrays.asList(islatemp.getX(), islatemp.getY(), islatemp.tipoToInt())));
+                }
+            }else{
+                Isla porborrar = grafo.borrarIsla(isla);
+                aaa.add(new ArrayList<>(Arrays.asList(porborrar.getX(), porborrar.getY(), porborrar.tipoToInt())));
+            }
         }
+        return aaa;
     }
     
     

@@ -435,6 +435,7 @@
         <Component class="javax.swing.JButton" name="button_comprar_componentes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Comprar componentes"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_comprar_componentesActionPerformed"/>

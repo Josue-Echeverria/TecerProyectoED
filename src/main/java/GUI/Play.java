@@ -7,6 +7,7 @@ package GUI;
 import Cliente.Cliente;
 import Cliente.Jugador;
 import Componentes.Armas;
+import Componentes.Conector;
 import Componentes.Mina;
 import Componentes.TemploBruja;
 import Mar.Isla;
@@ -339,6 +340,7 @@ public class Play extends javax.swing.JFrame {
         bg.add(label_dinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, 140, 30));
 
         button_comprar_componentes.setText("Comprar componentes");
+        button_comprar_componentes.setEnabled(false);
         button_comprar_componentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_comprar_componentesActionPerformed(evt);
@@ -695,7 +697,13 @@ public class Play extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No tienes comodines", "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
             }else{
-                cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
+                if(comandoInput.getText().split("-")[0].equals("VENDER")){
+                    if(this.cliente.jugador.tiene_mercado)
+                        cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
+                    else
+                        JOptionPane.showMessageDialog(null, "No tienes un mercado", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }else
+                    cliente.salida.writeObject(new Mensaje(cliente.nombre, comandoInput.getText()));
             }
             
         } catch (IOException ex) {
@@ -779,15 +787,28 @@ public class Play extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //Mina(Jugador jugador,int segundos_en_producir,int kgs_acero_que_produce) {
+        Mina mina = new Mina(this.cliente.jugador,2,100);
+        Isla isla1 = new Isla(mina);
+        isla1.setX(1);
+        isla1.setY(1);
+        Mina mina1 = new Mina(this.cliente.jugador,2,100);
+        Isla isla2 = new Isla(mina1);
+        isla2.setX(2);
+        isla2.setY(2);
+        Isla isla3 = new Isla(new Conector(isla1,isla2));
+        isla3.setX(3);
+        isla3.setY(3);        
+        this.cliente.jugador.grafo.agregarArista( isla1,isla2 );
+
+        /*/Mina(Jugador jugador,int segundos_en_producir,int kgs_acero_que_produce) {
         Isla isla1 = new Isla(new Mina(this.cliente.jugador,2,100));
         isla1.setX(1);
         isla1.setY(1);
         Isla isla2 = new Isla(new Mina(this.cliente.jugador,2,100));
         isla2.setX(19);
         isla2.setY(19);
-            this.cliente.jugador.grafo.agregarIsla(isla1);
-            this.cliente.jugador.grafo.agregarIsla(isla2);
+          //  this.cliente.jugador.grafo.agregarIsla(isla1);
+           // this.cliente.jugador.grafo.agregarIsla(isla2);*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel3jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3jPanel1MouseClicked
@@ -821,18 +842,13 @@ public class Play extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_player3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        this.jLabel_bomba.setEnabled(true);
-        this.jLabel_multiple.setEnabled(true);
-        this.jLabel_canion.setEnabled(true);
-        this.jLabel_canion_barba_roja.setEnabled(true);
         this.jButton4.setVisible(false);
-        /*this.remove(this.jButton4);
+        this.remove(this.jButton4);
         try {
             this.cliente.salida.writeObject(new Mensaje(true));
         } catch (IOException ex) {
             Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -954,12 +970,9 @@ public class Play extends javax.swing.JFrame {
                                     label.setText("X");    
                                     cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.target,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getX(),cliente.jugador.arma_cargada.getY()));
                                 }
-                            
                             } catch (IOException ex) {
                                 Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            
-
                             cliente.jugador.disparar_arma_cargada();
                         }else{
                             JOptionPane.showMessageDialog(null, "No tienes ningun arma cargada", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -1164,6 +1177,7 @@ public class Play extends javax.swing.JFrame {
         this.jLabel_multiple.setEnabled(true);
         this.jLabel_canion.setEnabled(true);
         this.jLabel_canion_barba_roja.setEnabled(true);
+        this.button_comprar_componentes.setEnabled(true);        
     }
     
     public void setCuadricula(Matriz[][] cuadriculaEntrada){
@@ -1175,4 +1189,5 @@ public class Play extends javax.swing.JFrame {
             }
         }
     }
+    
 }

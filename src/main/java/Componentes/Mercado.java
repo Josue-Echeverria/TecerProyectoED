@@ -4,11 +4,13 @@
  */
 package Componentes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public class Mercado extends Componente{
+public class Mercado extends Componente implements Serializable{
     int precio;
     public boolean esVisible;
     public Mercado() {

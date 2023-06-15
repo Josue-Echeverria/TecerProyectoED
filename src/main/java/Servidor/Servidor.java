@@ -22,7 +22,7 @@ public class Servidor {
     ArrayList<Jugador> jugadores;
     ServerConnectionsThread conexionsThread;
     public ProcesadorMensaje lector;
-
+    public int jugadores_listos = 0;
     public Servidor(PantallaServidor pantalla){
         this.pantalla = pantalla;
         connect();
@@ -31,6 +31,7 @@ public class Servidor {
         conexionsThread.start();
         jugadores = new ArrayList<Jugador>();
         lector = new ProcesadorMensaje(this);        
+        
     }
     
     public void connect(){
@@ -99,8 +100,8 @@ public class Servidor {
        
             }
         }
-        if(!mensaje.isNewPlayer)
-            this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
+        //if(!mensaje.isNewPlayer)
+            //this.pantalla.write("Enviado " + threadsClientesAceptados.size() +" veces: " + mensaje);
     }
     
     Jugador buscarJugador(String nombre){
@@ -151,5 +152,16 @@ public class Servidor {
             listaNombres.add(cliente.nombre);
         }
         return listaNombres;
+    }
+    
+    public void iniciarPartida(){
+        jugadores_listos++;
+        if(this.threadsClientesAceptados.size()>=2){
+            if(this.threadsClientesAceptados.size() == jugadores_listos){
+                this.mensajeTodos(new Mensaje(false));
+            }
+        }else{
+            
+        }
     }
 }

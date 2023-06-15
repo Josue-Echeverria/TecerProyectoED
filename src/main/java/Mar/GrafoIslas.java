@@ -13,98 +13,33 @@ import java.util.ArrayList;
 import java.util.List;
 import Componentes.Conector;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
-public class GrafoIslas implements Serializable {
 
-    private List<Isla> islas;
-    private List<List<Conector>> conexiones;
+public class GrafoIslas implements Serializable {
+    private HashMap<Isla, ArrayList<Isla>> grafo;
 
     public GrafoIslas() {
-        islas = new ArrayList<>();
-        conexiones = new ArrayList<>();
+        this.grafo = new HashMap<>();
     }
 
-    public void agregarIsla(Isla isla) {
-        islas.add(isla);
-        conexiones.add(new ArrayList<Conector>());
-    }
-
-    public void agregarConexion(Conector conector) {
-    int isla1 = islas.indexOf(conector.getIsla1());
-    int isla2 = islas.indexOf(conector.getIsla2());
-    
-    if (isla1 != -1 && isla2 != -1) {
-        conexiones.get(isla1).add(conector);
-        conexiones.get(isla2).add(conector);
-    }
-}
-
-    public List<Isla> obtenerIslas() {
-        return islas;
-    }
-
-    public List<Conector> obtenerAdyacentes(int isla) {
-        return conexiones.get(isla);
-    }
-    
-    
-    public Isla[][] generarMatrizAdyacencia() {
-        int numIslas = islas.size();
-        Isla[][] matrizAdyacencia = new Isla[numIslas][numIslas];
-
-        // Inicializar la matriz de adyacencia con ceros
-        for (int i = 0; i < numIslas; i++) {
-            for (int j = 0; j < numIslas; j++) {
-                matrizAdyacencia[i][j] = new Isla(null);
-            }
+    public void agregarArista(Isla origen, Isla destino) {
+        if (grafo.containsKey(origen)) {
+            grafo.get(origen).add(destino);
+        } else {
+            ArrayList<Isla> destinos = new ArrayList<>();
+            destinos.add(destino);
+            grafo.put(origen, destinos);
         }
-
-        // Llenar la matriz de adyacencia con las conexiones existentes
-        for (int i = 0; i < numIslas; i++) {
-            List<Conector> adyacentes = conexiones.get(i);
-            for (Conector conector : adyacentes) {
-                Isla isla1 = conector.getIsla1();
-                Isla isla2 = conector.getIsla2();
-                int indice1 = islas.indexOf(isla1);
-                int indice2 = islas.indexOf(isla2);
-                matrizAdyacencia[indice1][indice2] = matrizAdyacencia[indice2][indice1] = isla1;
-            }
-        }
-        return matrizAdyacencia;
-    }
-    
-    public Isla islaEnPos(int x,int y){
-        for(Isla isla : this.islas){
-            if((isla.getX() == x) && (isla.getY() == y)){
-                return isla;
-            }
-        }
-        return null;
-    }
-    
-    public Isla borrarIsla(Isla isla){
-        if(islas.contains(isla)){
-            for(Isla tmp : islas){
-                borrarConexion(islas.indexOf(tmp),isla);
-            }
-            conexiones.remove(islas.indexOf(isla));
-            islas.remove(isla);
-            return isla;
-        }
-        return null;
-    }
-    
-    
-    
-    public void borrarConexion(int index, Isla islaEliminar ){
-        List<Conector> conectores = conexiones.get(index);
-        for(Conector conector : conectores){
-            if(conector.getIsla2() == islaEliminar){
-                conector.setIsla2(null);
-            }
+        if (grafo.containsKey(destino)) {
+            grafo.get(destino).add(origen);
+        } else {
+            ArrayList<Isla> destinosOpuestos = new ArrayList<>();
+            destinosOpuestos.add(origen);
+            grafo.put(destino, destinosOpuestos);
         }
     }
-    /*
+
     public ArrayList<ArrayList<Isla>> caminos(Isla inicio, Isla fin) {
         HashSet<Isla> visitados = new HashSet<>();
         ArrayList<Isla> caminoActual = new ArrayList<>();
@@ -115,7 +50,7 @@ public class GrafoIslas implements Serializable {
 
     private void encontrarCaminos(Isla nodoActual, Isla fin, HashSet<Isla> visitados, 
         ArrayList<Isla> caminoActual, ArrayList<ArrayList<Isla>> caminosEncontrados) {
-
+        
         visitados.add(nodoActual);
         caminoActual.add(nodoActual);
 
@@ -134,11 +69,54 @@ public class GrafoIslas implements Serializable {
         visitados.remove(nodoActual);
         caminoActual.remove(caminoActual.size() - 1);
     }
-
+    
     public ArrayList<Isla> getDestinos(Isla origen) {
         if (grafo.containsKey(origen)) {
             return grafo.get(origen);
         }
         return null;
-    }   */
+    }
+    
+    public void actualizarVisibilidadEnemigo(Isla isla) {
+        if (grafo.containsKey(isla)) {
+            ArrayList<Isla> destinos = grafo.get(isla);
+            for (Isla destino : destinos) {
+                destino.setVisibleEnemigo(true); // Actualizar el parámetro visibleEnemigo a true
+                actualizarVisibilidadEnemigo(destino); // Llamada recursiva para los destinos conectados
+            }
+        }
+    }
+    public void borrarConexion(Isla origen, Isla destino) {
+    if (grafo.containsKey(origen)) {
+        ArrayList<Isla> destinos = grafo.get(origen);
+        destinos.remove(destino);
+    }
+    
+    if (grafo.containsKey(destino)) {
+        ArrayList<Isla> destinosOpuestos = grafo.get(destino);
+        destinosOpuestos.remove(origen);
+    }
+}
+
+    public Isla borrarIsla(Isla isla) {
+        if (grafo.containsKey(isla)) {
+            // Eliminar conexiones asociadas a la isla a borrar
+            ArrayList<Isla> destinos = grafo.get(isla);
+            for (Isla destino : destinos) {
+                grafo.get(destino).remove(isla);
+            }
+
+            grafo.remove(isla); // Eliminar la isla del grafo
+            return isla;
+        }
+        return null;
+    }
+    public Isla buscarIslaPorCoordenadas(int x, int y) {
+        for (Isla isla : grafo.keySet()) {
+            if (isla.getX() == x && isla.getY() == y) {
+                return isla;
+            }
+        }
+        return null;
+    }
 }

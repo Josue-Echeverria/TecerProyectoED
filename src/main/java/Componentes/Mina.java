@@ -6,11 +6,12 @@ package Componentes;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
+import java.io.Serializable;
 /**
  *
  * @author admin
  */
-public class Mina extends Componente{
+public class Mina extends Componente implements Serializable{
     int precio;
     public boolean esVisible;
     public ThreadMina thread;

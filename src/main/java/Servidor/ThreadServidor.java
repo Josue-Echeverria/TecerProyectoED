@@ -68,6 +68,8 @@ public class ThreadServidor extends Thread{
                         server.requestPlayer(mensaje);
                     }else if (mensaje.isRespuestaPlayer){
                         server.sendPlayer(mensaje);
+                    }else if (mensaje.request_iniciar_partida){
+                        server.iniciarPartida();
                     }else
                         server.broadcoast(mensaje);
                 } catch (ClassNotFoundException ex) {

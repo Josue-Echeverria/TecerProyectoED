@@ -61,8 +61,91 @@ public class Isla implements Serializable  {
     public String getTipoIsla() {
         return tipoIsla;
     }
+    public Isla(int x, int y, FuenteEnergia fuenteEner) {
+        this.x = x;
+        this.y = y;
+        this.fuenteEnergia = fuenteEner;
+    }
 
+    public Isla(int x, int y, Mercado mercadito) {
+        this.x = x;
+        this.y = y;
+        this.mercadito = mercadito;
+    }
+
+    public Isla(int x, int y, TemploBruja templo) {
+        this.x = x;
+        this.y = y;
+        this.templo = templo;
+    }
+
+    public Isla(int x, int y, Mina mina) {
+        this.x = x;
+        this.y = y;
+        this.mina = mina;
+    }
+
+    public Isla(int x, int y, Armeria armeria) {
+        this.x = x;
+        this.y = y;
+        this.armeria = armeria;
+    }
+
+    public Isla(int x, int y, Conector conector) {
+        this.x = x;
+        this.y = y;
+        this.conector = conector;
+    }
     public void setTipoIsla(String tipoIsla) {
         this.tipoIsla = tipoIsla;
+    }
+        public FuenteEnergia getFuenteEner() {
+        return fuenteEnergia;
+    }
+
+    public Mercado getMercadito() {
+        return mercadito;
+    }
+
+    public TemploBruja getTemplo() {
+        return templo;
+    }
+
+    public Mina getMina() {
+        return mina;
+    }
+
+    public Armeria getArmeria() {
+        return armeria;
+    }
+
+    public Conector getConector() {
+        return conector;
+    }
+    public int tipoToInt(){
+        String nombre = this.componente.getNombre();
+        switch(nombre){
+            case "la fuente de energia"->{
+                return 0;
+            }
+            case "el conector"->{
+                return 1;
+            }
+            case "el mercado"->{
+                return 2;
+            }
+            case "la mina"->{
+                return 3;
+            }
+            case "el templo de bruja"->{
+                return 4;
+            }
+            case "la armeria"->{
+                return 5;
+            }
+            
+        }
+        return -1;
+    
     }
 }

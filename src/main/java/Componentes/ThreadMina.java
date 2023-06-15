@@ -6,6 +6,7 @@ package Componentes;
 
 import Cliente.Cliente;
 import Cliente.Jugador;
+import java.io.Serializable;
 
 import static java.lang.Thread.sleep;
 
@@ -13,7 +14,7 @@ import static java.lang.Thread.sleep;
  *
  * @author admin
  */
-public class ThreadMina extends Thread{
+public class ThreadMina extends Thread implements Serializable{
     Mina mina;
     private boolean isRunning = true;
     private boolean isPaused = false;

@@ -4,11 +4,13 @@
  */
 package Componentes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lmaag
  */
-public class FuenteEnergia extends Componente{
+public class FuenteEnergia extends Componente implements Serializable{
     private int precio;  // Precio de la fuente de energía
     private boolean destruido;  // Indica si les destruyeron la fuente
     private int posicionX;  // Ubicación en el mar X
