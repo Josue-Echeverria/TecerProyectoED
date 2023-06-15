@@ -35,6 +35,9 @@ public abstract class Armas implements Serializable{
     public CanionBarbaRoja cargarCanionBarbaRoja(){
         return new CanionBarbaRoja();
     }
+    public Kraken cargarKraken(){
+        return new Kraken();
+    }
     public abstract void setXY(int x,int y);
     public abstract int getX();
     public abstract int getY();
@@ -42,6 +45,75 @@ public abstract class Armas implements Serializable{
     public abstract void setXY(int[] pos);
     public abstract int[] getXY();
 }
+
+class Kraken extends Armas{
+
+    @Override
+    public Armas disparar() {
+        return new Armas() {
+            public Armas disparar() {
+                return null;
+            }
+            @Override
+            public void setXY(int x, int y) {
+            }
+            @Override
+            public int getX() {
+                return -1;
+            }
+            @Override
+            public int getY() {
+                return -1;
+            }
+            @Override
+            public String getName() {
+                return "";
+            }
+
+            @Override
+            public void setXY(int[] pos) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public int[] getXY() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+            };
+    }
+
+    @Override
+    public void setXY(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getX() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getY() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getName() {
+        return "Kraken";
+    }
+
+    @Override
+    public void setXY(int[] pos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int[] getXY() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+}
+
 
 class Canion extends Armas{
     int costo;

@@ -31,7 +31,7 @@ public class Jugador implements Serializable{
     public javax.swing.JLabel label_acero;
     public int dinero;
     public javax.swing.JLabel label_dinero;
-    public int comodin = 1;
+    public int comodin = 2;
     public boolean acepto_oferta;
     public Armas arma_cargada;
     public int canion = 10;
@@ -63,7 +63,7 @@ public class Jugador implements Serializable{
     public Jugador(String nombre){
         this.nombre = nombre;
         acero = 100000;
-        this.comodin = 1;
+        this.comodin = 2;
         dinero = 100000;
         this.matriz = iniciarMatriz(matriz);
         this.grafo = iniciarGrafo(grafo, matriz);
@@ -306,6 +306,10 @@ public class Jugador implements Serializable{
                 this.arma_cargada = arma_cargada.cargarCanionBarbaRoja();
                 JOptionPane.showMessageDialog(null, "Has cargado el canion barba roja, selecciona una casilla enemiga para disparar", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
+            case "KRAKEN" -> {
+                this.arma_cargada = arma_cargada.cargarKraken();
+                JOptionPane.showMessageDialog(null, "Has cargado el comodin del Kraken, selecciona una casilla enemiga para enviarlo al mar el enemigo", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
     
@@ -339,6 +343,31 @@ public class Jugador implements Serializable{
             restarArma(name);
             actualizarArmas();
         }
+    }
+    
+    public ArrayList<ArrayList<Integer>> recibirKraken(){
+        int x = generarRandomX();
+        int y = generarRandomY();
+        ArrayList<Isla> temp;
+        ArrayList<ArrayList<Integer>> aaa = new ArrayList<>();
+        Isla isla = this.grafo.buscarIslaPorCoordenadas(x, y);
+        while (isla == null){
+            x = generarRandomX();
+            y = generarRandomY();
+            isla = this.grafo.buscarIslaPorCoordenadas(x, y);
+        }
+        if(isla.componente.getNombre().equals("un conector")||isla.componente.getNombre().equals("una fuente de energia")){
+            temp = this.grafo.getDestinos(isla);
+            temp.add(grafo.borrarIsla(isla));
+            for(Isla islatemp : temp){
+                aaa.add(new ArrayList<>(Arrays.asList(islatemp.getX(), islatemp.getY(), islatemp.tipoToInt())));
+            }
+        }
+        else{
+            Isla porborrar = grafo.borrarIsla(isla);
+            aaa.add(new ArrayList<>(Arrays.asList(porborrar.getX(), porborrar.getY(), porborrar.tipoToInt())));
+        }
+        return aaa;
     }
     
     public ArrayList<ArrayList<Integer>> recibir_disparo(int x, int y){

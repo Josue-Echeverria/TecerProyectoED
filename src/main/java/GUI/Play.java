@@ -778,7 +778,9 @@ public class Play extends javax.swing.JFrame {
                     this.cliente.jugador.avisarEscudoActivo();
                     break;
                 }
-                case 2->{//TO DO 
+                case 2->{
+                    this.cliente.jugador.cargar_arma("KRAKEN");
+                    cliente.jugador.comodin = 1;
                 }
             }
         }else{
@@ -939,6 +941,7 @@ public class Play extends javax.swing.JFrame {
     }
 
      private void generarLabelsPlayer(){//Enemigo
+         
         Border blackline = BorderFactory.createLineBorder(Color.black);
         int x = 0;
         int y = 0;
@@ -960,6 +963,10 @@ public class Play extends javax.swing.JFrame {
                             int sisX = label.getLocation().x;
                             int sisY = label.getLocation().y;
                             try {
+                                if(cliente.jugador.arma_cargada.getName().equals("Kraken")){
+                                    cliente.jugador.arma_cargada.setXY(sisX/25, sisY/25);
+                                    cliente.salida.writeObject(new Mensaje(cliente.nombre,cliente.jugador.target,cliente.jugador.arma_cargada.getName(),cliente.jugador.arma_cargada.getX(),cliente.jugador.arma_cargada.getY()));
+                                }
                                 if(cliente.jugador.arma_cargada.getName().equals("Bomba")){
                                     cliente.jugador.arma_cargada.setXY(posicion_disparo(sisX/25,sisY/25));
                                     label.setText("X");
@@ -1127,8 +1134,8 @@ public class Play extends javax.swing.JFrame {
         this.jTextArea_bitacora.append("Y se volo "+nombreIsla+" xD\n");
     }
 //PROTOTYPES:
-    public void invocarKraken(){
-        
+    public void invocarKraken(String enviador){
+        this.jTextArea_bitacora.append("Has recibido el ataque de kraken de "+enviador+"\n");
     }
 
     public JTextArea getjTextArea_bitacora() {

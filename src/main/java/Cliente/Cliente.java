@@ -65,6 +65,17 @@ public class Cliente {
         if(mensaje.is_confirmation_hit){
             escribirDisparoEnBitacora(mensaje);
         }else{
+            if(mensaje.getNombre_arma().equals("Kraken")) {
+                this.pantalla.invocarKraken(mensaje.getEnviador());
+                //this.jugador.recibirKraken();
+                ArrayList<ArrayList<Integer>> victima = this.jugador.recibirKraken();
+                
+                mensaje.is_confirmation_hit = true;
+                mensaje.hit = true;
+               // mensaje.setNombre_isla(victima.get(0).componente.getNombre());
+                mensaje.islasAfectadas = victima;
+                this.pantalla.disparoAcertado(intToTipo(victima.get(0).get(2)));
+            }
             if(mensaje.getNombre_arma().equals("Bomba")){
                 this.pantalla.recibirDisparo(mensaje.getEnviador(),mensaje.getNombre_arma(), mensaje.bomba_xys);
                 this.jugador.recibir_disparo(mensaje.getX(),mensaje.getY());
